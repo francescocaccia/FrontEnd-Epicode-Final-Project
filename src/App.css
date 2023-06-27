@@ -1,0 +1,37 @@
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+/* qui vengono gestiti tutti i caroselli */
+.carousel-image {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+
+/* secondo carosello */
+
+.custom-carousel {
+  width: 300px;
+  height: 200px;
+  margin-right: 10px;
+}
+
+.carousel-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#restaurantCard {
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

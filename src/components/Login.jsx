@@ -1,10 +1,11 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { IoLogIn } from "react-icons/io5";
+
 const Login = () => {
   return (
-    <Form style={{ padding: "20px", maxWidth: "500px", width: "100%", height: "auto" }}>
-      <div>
+    <Form className="login-form">
+      <div className="login-header">
         <IoLogIn className="fs-1" />
         <h4>Esegui il Login per prenotare il tuo ristorante</h4>
       </div>

@@ -5,8 +5,8 @@ const RestaurantCard = () => (
   <Container>
     <Card id="restaurantCard">
       <Card.Body>
-        <div className="d-flex">
-          <Carousel className="custom-carousel">
+        <div className="d-flex flex-column flex-md-row align-items-md-center">
+          <Carousel className="custom-carousel mr-md-4 mb-3 mb-md-0">
             <Carousel.Item>
               <a href="/link-pagina-1">
                 <img
@@ -35,7 +35,7 @@ const RestaurantCard = () => (
               </a>
             </Carousel.Item>
           </Carousel>
-          <blockquote className="blockquote mb-0">
+          <blockquote className="blockquote">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
             <footer className="blockquote-footer">
               Someone famous in <cite title="Source Title">Source Title</cite>

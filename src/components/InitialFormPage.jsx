@@ -9,9 +9,8 @@ function InitialFormPage() {
         style={{
           backgroundImage:
             "url('https://image.freepik.com/foto-gratuito/gustosi-ingredienti-freschi-appetitosi-di-cibo-italiano-su-sfondo-scuro_1220-1741.jpg')",
-          backgroundSize: "100% 100%",
+          backgroundSize: "cover",
           backgroundPosition: "center",
-          minHeight: "80vh",
           position: "absolute",
           top: 0,
           left: 0,

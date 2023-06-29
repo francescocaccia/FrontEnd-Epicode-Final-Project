@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { IoLogIn } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -16,9 +17,15 @@ const Login = () => {
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control type="password" placeholder="Password" />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Login
-      </Button>
+      <div>
+        <Button variant="primary" type="submit" className="mb-3">
+          Login
+        </Button>
+        <br />
+        <Link className="text-dark" to="/RegistrationPage" style={{ textDecoration: "none" }}>
+          Se non sei iscritto clicca qui e iscriviti subito
+        </Link>
+      </div>
     </Form>
   );
 };

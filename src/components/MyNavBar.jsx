@@ -19,7 +19,7 @@ const MyNavBar = () => {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/restaurant">Restaurant</Nav.Link>
-            <Nav.Link href="#contact">Contact</Nav.Link>
+            <Nav.Link href="/registrationPage">Contact</Nav.Link>
           </Nav>
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">

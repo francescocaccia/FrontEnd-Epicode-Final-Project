@@ -4,6 +4,7 @@ import "./App.css";
 import MyNavBar from "./components/MyNavBar";
 import InitialFormPage from "./components/InitialFormPage";
 import RestaurantPage from "./components/RestaurantPage";
+import RegistrationPage from "./components/RegistrationPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<InitialFormPage />} />
         <Route path="/restaurant" element={<RestaurantPage />} />
+        <Route path="/registrationPage" element={<RegistrationPage />} />
       </Routes>
     </BrowserRouter>
   );

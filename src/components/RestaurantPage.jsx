@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Card, Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const RestaurantCard = () => (
   <Container>
@@ -8,31 +9,37 @@ const RestaurantCard = () => (
         <div className="d-flex flex-column flex-md-row align-items-md-center">
           <Carousel className="custom-carousel mr-md-4 mb-3 mb-md-0">
             <Carousel.Item>
-              <a href="/link-pagina-1">
+              <Link to="/ReservationRestaurant">
+                {" "}
+                {/* Modifica il percorso in base alla tua configurazione */}
                 <img
                   className="carousel-image"
                   src="https://cdn.squaremile.com/gallery/5de91cc9313d9.jpeg"
                   alt="Prima immagine"
                 />
-              </a>
+              </Link>
             </Carousel.Item>
             <Carousel.Item>
-              <a href="/link-pagina-2">
+              <Link to="/ReservationRestaurant">
+                {" "}
+                {/* Modifica il percorso in base alla tua configurazione */}
                 <img
                   className="carousel-image"
                   src="https://u.tfstatic.com/restaurant_photos/547/439547/169/612/cavallini-food-wine-spirits-piatto-del-giorno-2f35c.jpg"
                   alt="Seconda immagine"
                 />
-              </a>
+              </Link>
             </Carousel.Item>
             <Carousel.Item>
-              <a href="/link-pagina-3">
+              <Link to="/ReservationRestaurant">
+                {" "}
+                {/* Modifica il percorso in base alla tua configurazione */}
                 <img
                   className="carousel-image"
                   src="https://www.lucianopignataro.it/wp-content/uploads/2016/06/unnamed-6-e1465852643536.jpg"
                   alt="Terza immagine"
                 />
-              </a>
+              </Link>
             </Carousel.Item>
           </Carousel>
           <blockquote className="blockquote">

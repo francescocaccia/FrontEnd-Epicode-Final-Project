@@ -1,6 +1,7 @@
 import { Container, Row, Col, Form, Carousel } from "react-bootstrap";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import MyFooter from "./MyFooter";
+import AdvertisementPage from "./AdvertisementPage";
 
 function InitialFormPage() {
   return (
@@ -228,6 +229,7 @@ function InitialFormPage() {
         </Carousel>
       </Container>
       <div className="mt-5">
+        <AdvertisementPage />
         <MyFooter />
       </div>
     </div>

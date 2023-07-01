@@ -1,5 +1,10 @@
 export const GET_RISTORANTI = "GET_RISTORANTI";
 export const SET_ADMIN = "SET_ADMIN";
+export const ADD_MENU_FIELD = "ADD_MENU_FIELD";
+export const DELETE_MENU_FIELD = "DELETE_MENU_FIELD";
+export const SET_CARD_IMMAGINI = "SET_CARD_IMMAGINI";
+export const AGGIUNGI_IMMAGINE = "AGGIUNGI_IMMAGINE";
+export const CANCELLA_IMMAGINE = "CANCELLA_IMMAGINE";
 
 export const getRistorantiAction = () => {
   const url = "http://localhost:3001/ristoranti/all";
@@ -37,3 +42,21 @@ export const createRestaurant = restaurantData => {
     payload: restaurantData,
   };
 };
+
+export const addMenuField = () => ({
+  type: ADD_MENU_FIELD,
+});
+
+export const deleteMenuField = index => ({
+  type: DELETE_MENU_FIELD,
+  payload: index,
+});
+
+export const aggiungiImmagine = () => ({
+  type: "AGGIUNGI_IMMAGINE",
+});
+
+export const cancellaImmagine = index => ({
+  type: "CANCELLA_IMMAGINE",
+  payload: index,
+});

@@ -7,7 +7,7 @@ const MyNavBar = () => {
   return (
     <>
       <div className="bg-light text-right rtl">
-        <a className="text-dark text-decoration-none ms-3" href="/addRestaurant">
+        <a className="text-dark text-decoration-none ms-3 " href="/addRestaurant">
           Registra il tuo ristorante
         </a>
       </div>

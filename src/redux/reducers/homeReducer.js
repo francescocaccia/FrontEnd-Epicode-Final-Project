@@ -3,6 +3,7 @@ import { ADD_MENU_FIELD } from "../actions";
 import { DELETE_MENU_FIELD } from "../actions";
 import { AGGIUNGI_IMMAGINE } from "../actions";
 import { CANCELLA_IMMAGINE } from "../actions";
+import {GET_USER_LOGGED } from "../actions";
 const initialState = {
   ristornati: [],
   isAdmin: false,
@@ -33,6 +34,11 @@ const homeReducer = (state = initialState, action) => {
         ...state,
         cardImmagini: state.cardImmagini.filter((_, index) => index !== action.payload),
       };
+      case GET_USER_LOGGED:
+        return{
+          ...state,
+          clienteLoggato: action.payload
+        }
 
     default:
       return state;

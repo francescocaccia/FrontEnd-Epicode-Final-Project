@@ -26,7 +26,7 @@ function RegistrationPage() {
       role: isRistoratore === true ? "ADMIN" : "USER",
     };
 
-    fetch("https://b2cd-2001-b07-6469-8e8d-ec87-b24a-3e17-abba.ngrok-free.app/auth/register", {
+    fetch("http://localhost:8080/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

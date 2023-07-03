@@ -20,15 +20,7 @@ function AddRestaurant() {
   const [cardImmagini, setCardImmagini] = useState([""]);
   const [nomeRistorante, setNomeRistorante] = useState("");
 
-  const tipoCucinaOptions = [
-    "cucina_vegana",
-    "cucina_italiana",
-    "cucina_indiana",
-    "cucina_libanese",
-    "cucina_di_pesce",
-    "steak_house",
-    "cucina_vegetariana",
-  ];
+  const tipoCucinaOptions = [];
 
   const regioneOptions = [
     "Valle d'Aosta",
@@ -57,8 +49,11 @@ function AddRestaurant() {
     const updatedCardImmagini = [...cardImmagini, ""];
     setCardImmagini(updatedCardImmagini);
   };
-
-  const handleDeleteText = index => {
+  const handleDeleteText = (index) => {
+    if (cardImmagini.length === 1) {
+      return; 
+    }
+  
     const updatedCardImmagini = [...cardImmagini];
     updatedCardImmagini.splice(index, 1);
     setCardImmagini(updatedCardImmagini);
@@ -86,7 +81,35 @@ function AddRestaurant() {
     setMenu(updatedMenu);
   };
 
-  const handleSubmit = () => {
+  const populateTipoCucina = () =>{
+
+   
+
+    fetch("http://localhost:8080/tipoCucina/all", {
+    
+      headers: {
+        "Content-Type": "application/json",
+      },
+      
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+
+      data.forEach(element => {
+        tipoCucinaOptions.push(element);
+      });
+
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+  }
+
+  const showDeleteButton = cardImmagini.length > 1;
+
+  const handleSubmit = (event) => {
     const restaurantData = {
       totaleCoperti: Number(totaleCoperti),
       tipoCucina,
@@ -106,10 +129,13 @@ function AddRestaurant() {
       },
     };
 
-    fetch("https://d75f-2001-b07-6469-8e8d-d23a-72e2-a1b0-93ba.ngrok-free.app/ristoranti/create", {
+    const token = localStorage.getItem("token");
+
+    fetch("http://localhost:8080/ristoranti/create", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        Authorization:`Bearer ${token}`
+        
       },
       body: JSON.stringify(restaurantData),
     })
@@ -122,12 +148,14 @@ function AddRestaurant() {
       });
 
     dispatch(createRestaurant(restaurantData));
+    event.preventDefault();
   };
 
   return (
     <div className="container mt-5 text-center fw-bold">
+      <GrRestaurant className="fs-1" />
       <h2>
-        Inserisci il tuo ristorante <GrRestaurant />
+        Inserisci il tuo ristorante 
       </h2>
       <Form.Group className="mb-3" controlId="nomeRistorante">
         <Form.Label>
@@ -156,13 +184,15 @@ function AddRestaurant() {
             Tipo Cucina
             <GiCook />
           </Form.Label>
-          <Form.Control as="select" value={tipoCucina} onChange={e => setTipoCucina(e.target.value)} required>
+          <Form.Control as="select" value={tipoCucina} onChange={e => setTipoCucina(e.target.value)} required onClick={populateTipoCucina()}> 
+            
             <option value="">Seleziona una opzione</option>
             {tipoCucinaOptions.map(option => (
               <option key={option} value={option}>
                 {option}
               </option>
             ))}
+            
           </Form.Control>
         </Form.Group>
         <p className="mt-3">
@@ -189,7 +219,7 @@ function AddRestaurant() {
               required
             />
             {index > 0 && (
-              <Button variant="danger" onClick={() => handleDeleteFieldMenu(index)}>
+              <Button className="mt-2" variant="danger" onClick={() => handleDeleteFieldMenu(index)}>
                 Cancella
                 <MdOutlineDelete />
               </Button>
@@ -198,10 +228,10 @@ function AddRestaurant() {
         ))}
 
         <Button variant="info" onClick={handleAddFieldMenu}>
-          Aggiungi
+          Aggiungi <IoAddSharp />
         </Button>
 
-        <Form.Group className="mb-3" controlId="luogo">
+        <Form.Group className="mb-3 mt-5" controlId="luogo">
           <Form.Label>
             Luogo
             <FaMapMarkerAlt />
@@ -250,14 +280,16 @@ function AddRestaurant() {
         <div>
           {cardImmagini.map((cardImmagini, index) => (
             <Form.Group key={index}>
+                  Immagine {index + 1}
               <Form.Control type="text" value={cardImmagini} onChange={e => handleChangeText(index, e.target.value)} />
-              <Button variant="danger" onClick={() => handleDeleteText(index)}>
-                Rimuovi
-              </Button>
+              {index > 0 && (
+              <Button className="mt-2" variant="danger" onClick={() => handleDeleteText(index)} hidden={!showDeleteButton}>
+  Rimuovi <MdOutlineDelete />
+</Button>)}
             </Form.Group>
           ))}
-          <Button variant="primary" onClick={handleAddText} hidden={cardImmagini.length > 2}>
-            Aggiungi immagine
+          <Button className="mt-2" variant="info" onClick={handleAddText} hidden={cardImmagini.length > 2}>
+            Aggiungi <IoAddSharp />
           </Button>
         </div>
 
@@ -265,10 +297,10 @@ function AddRestaurant() {
           Aggiungi
         </Button> */}
 
-        <div className="justify-content-center mb-3">
-          <Button className="fw-bold" variant="info" type="submit">
-            Inserisci ristorante <IoAddSharp />
-          </Button>
+        <div className="justify-content-center mb-3 mt-5 ">
+        <Button className="fw-bold" variant="primary" type="submit" onClick={handleSubmit} >
+  Inserisci ristorante <IoAddSharp />
+</Button>
         </div>
       </Form>
     </div>

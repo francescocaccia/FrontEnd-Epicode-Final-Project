@@ -2,16 +2,17 @@ import React from "react";
 import { Container, Dropdown, Nav, Navbar } from "react-bootstrap";
 import Login from "./Login";
 import { LiaUserCircle } from "react-icons/lia";
+import NavbarForm from "./NavBarForm";
+import { Link } from "react-router-dom";
 
 const MyNavBar = () => {
   return (
     <>
-      <div className="bg-light text-right rtl">
-        <a className="text-dark text-decoration-none ms-3 " href="/addRestaurant">
+      <div className="bg-light text-right d-flex justify-content-end p-2">
+        <Link className="text-primary text-decoration-none ms-3 text-end" to="/addRestaurant">
           Registra il tuo ristorante
-        </a>
+        </Link>
       </div>
-
       <Navbar className="sticky-top navbar-with-shadow" bg="light" expand="lg">
         <Container>
           <Navbar.Brand href="/">
@@ -29,6 +30,7 @@ const MyNavBar = () => {
               <Nav.Link href="/restaurant">Restaurant</Nav.Link>
               <Nav.Link href="/registrationPage">Contact</Nav.Link>
             </Nav>
+            <NavbarForm />
             <Nav className="ms-auto">
               <Dropdown>
                 <Dropdown.Toggle className="text-light btn-lg btn-block" variant="info" id="dropdown-basic">

@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Card, Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const RestaurantCard = () => (
+const RestaurantPage = () => (
   <Container>
     <Card id="restaurantCard">
       <Card.Body>
@@ -54,4 +54,4 @@ const RestaurantCard = () => (
   </Container>
 );
 
-export default RestaurantCard;
+export default RestaurantPage;

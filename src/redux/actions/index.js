@@ -5,22 +5,9 @@ export const DELETE_MENU_FIELD = "DELETE_MENU_FIELD";
 export const SET_CARD_IMMAGINI = "SET_CARD_IMMAGINI";
 export const AGGIUNGI_IMMAGINE = "AGGIUNGI_IMMAGINE";
 export const CANCELLA_IMMAGINE = "CANCELLA_IMMAGINE";
+export const GET_USER_LOGGED = "GET_USER_LOGGED";
 
-export const getRistorantiAction = () => {
-  const url = "http://localhost:3001/ristoranti/all";
-  return async dispatch => {
-    try {
-      let resp = await fetch(url);
-      if (resp.ok) {
-        let data = await resp.json();
 
-        dispatch({ type: GET_RISTORANTI, payload: data });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 
 export const setAdmin = isAdmin => {
   return {
@@ -60,3 +47,42 @@ export const cancellaImmagine = index => ({
   type: "CANCELLA_IMMAGINE",
   payload: index,
 });
+
+
+export const getUserLoggedAction = () => {
+  const token = localStorage.getItem("token");
+  const url = "http://localhost:8080/cliente/me";
+  return async dispatch => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      if (resp.ok) {
+        let data = await resp.json();
+
+        dispatch({ type: GET_USER_LOGGED, payload: data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+
+export const getRistorantiAction = () => {
+  const url = "http://localhost:3001/ristoranti/all";
+  return async dispatch => {
+    try {
+      let resp = await fetch(url);
+      if (resp.ok) {
+        let data = await resp.json();
+
+        dispatch({ type: GET_RISTORANTI, payload: data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

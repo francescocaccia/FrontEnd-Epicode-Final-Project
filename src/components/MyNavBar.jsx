@@ -9,7 +9,7 @@ const MyNavBar = () => {
   return (
     <>
       <div className="bg-light text-right d-flex justify-content-end p-2">
-        <Link className="text-primary text-decoration-none ms-3 text-end" to="/addRestaurant">
+        <Link className="text-info fs-5 text-decoration-none ms-3 text-end" to="/addRestaurant">
           Registra il tuo ristorante
         </Link>
       </div>

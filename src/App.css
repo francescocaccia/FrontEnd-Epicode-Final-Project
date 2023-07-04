@@ -6,6 +6,11 @@
 
 }
 
+.border-none {
+  border: none;
+  outline: none;
+}
+
 /* CAMPI INPUT */
 
 .input-field {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
+import { BsSearch } from "react-icons/bs";
 const NavbarForm = () => {
   const [showSearch, setShowSearch] = useState(false);
 
@@ -25,9 +25,9 @@ const NavbarForm = () => {
     <div className={`bg-light text-right d-flex justify-content-end p-1 ${showSearch ? "show-search" : ""}`}>
       {showSearch && (
         <Form className="d-flex">
-          <Form.Control size="sm" type="text" placeholder="Città" />
+          <Form.Control  size="sm" type="text" placeholder="Città" />
           <Form.Control size="sm" type="text" placeholder="Tipo cucina, Nome del Ristorante" />
-          <Button type="submit">Cerca</Button>
+          <Button className="bg-info border-none" type="submit"><BsSearch /></Button>
         </Form>
       )}
     </div>

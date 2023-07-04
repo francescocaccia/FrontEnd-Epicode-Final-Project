@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://b2cd-2001-b07-6469-8e8d-ec87-b24a-3e17-abba.ngrok-free.app/`, {
+      const response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         body: JSON.stringify(login),
         headers: {
@@ -24,25 +24,27 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-
-        localStorage.setItem("token", data.accessToken);
+        alert("login effettuato");
+        const token = localStorage.setItem("token", data.token);
 
         setLogin({
           email: "",
           password: "",
         });
 
-        // Reindirizzamento a un'altra pagina
+     
         window.location.href = "/restaurantPage";
+        
+      
       } else {
-        // Errore nella richiesta
+      
         const errorData = await response.json();
         alert("Credenziali errate: " + errorData.message);
       }
     } catch (error) {
       console.log(error);
       alert("Si è verificato un errore: " + error);
-      window.location.href = "https://www.google.com";
+      
     }
   };
 

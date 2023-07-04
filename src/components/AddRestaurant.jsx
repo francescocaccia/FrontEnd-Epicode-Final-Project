@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createRestaurant } from "../redux/actions";
 import { Button, Form } from "react-bootstrap";
 import { GrRestaurant } from "react-icons/gr";
@@ -20,7 +20,17 @@ function AddRestaurant() {
   const [cardImmagini, setCardImmagini] = useState([""]);
   const [nomeRistorante, setNomeRistorante] = useState("");
 
-  const tipoCucinaOptions = [];
+
+  const tipoCucinaOptions = [
+    "Cucina italiana",
+    "Cucina indiana",
+    "Cucina di pesce",
+    "Stak house",
+    "Cucina vegana",
+    "Cucina vegetariana",
+    "Cucina libanese"
+  ];
+
 
   const regioneOptions = [
     "Valle d'Aosta",
@@ -51,9 +61,9 @@ function AddRestaurant() {
   };
   const handleDeleteText = (index) => {
     if (cardImmagini.length === 1) {
-      return; 
+      return;
     }
-  
+
     const updatedCardImmagini = [...cardImmagini];
     updatedCardImmagini.splice(index, 1);
     setCardImmagini(updatedCardImmagini);
@@ -81,31 +91,7 @@ function AddRestaurant() {
     setMenu(updatedMenu);
   };
 
-  const populateTipoCucina = () =>{
-
-   
-
-    fetch("http://localhost:8080/tipoCucina/all", {
-    
-      headers: {
-        "Content-Type": "application/json",
-      },
-      
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-
-      data.forEach(element => {
-        tipoCucinaOptions.push(element);
-      });
-
-      })
-      .catch(error => {
-        console.error(error);
-      });
-
-  }
+ 
 
   const showDeleteButton = cardImmagini.length > 1;
 
@@ -134,8 +120,9 @@ function AddRestaurant() {
     fetch("http://localhost:8080/ristoranti/create", {
       method: "POST",
       headers: {
-        Authorization:`Bearer ${token}`
-        
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+
       },
       body: JSON.stringify(restaurantData),
     })
@@ -155,7 +142,7 @@ function AddRestaurant() {
     <div className="container mt-5 text-center fw-bold">
       <GrRestaurant className="fs-1" />
       <h2>
-        Inserisci il tuo ristorante 
+        Inserisci il tuo ristorante
       </h2>
       <Form.Group className="mb-3" controlId="nomeRistorante">
         <Form.Label>
@@ -184,15 +171,18 @@ function AddRestaurant() {
             Tipo Cucina
             <GiCook />
           </Form.Label>
-          <Form.Control as="select" value={tipoCucina} onChange={e => setTipoCucina(e.target.value)} required onClick={populateTipoCucina()}> 
-            
-            <option value="">Seleziona una opzione</option>
+          <Form.Control
+            as="select"
+            value={luogo.regione}
+            onChange={e => setLuogo({ ...luogo, regione: e.target.value })}
+            required
+          >
+            <option value="">Tipo cucina - selezioan un opzione</option>
             {tipoCucinaOptions.map(option => (
               <option key={option} value={option}>
                 {option}
               </option>
             ))}
-            
           </Form.Control>
         </Form.Group>
         <p className="mt-3">
@@ -280,12 +270,12 @@ function AddRestaurant() {
         <div>
           {cardImmagini.map((cardImmagini, index) => (
             <Form.Group key={index}>
-                  Immagine {index + 1}
+              Immagine {index + 1}
               <Form.Control type="text" value={cardImmagini} onChange={e => handleChangeText(index, e.target.value)} />
               {index > 0 && (
-              <Button className="mt-2" variant="danger" onClick={() => handleDeleteText(index)} hidden={!showDeleteButton}>
-  Rimuovi <MdOutlineDelete />
-</Button>)}
+                <Button className="mt-2" variant="danger" onClick={() => handleDeleteText(index)} hidden={!showDeleteButton}>
+                  Rimuovi <MdOutlineDelete />
+                </Button>)}
             </Form.Group>
           ))}
           <Button className="mt-2" variant="info" onClick={handleAddText} hidden={cardImmagini.length > 2}>
@@ -298,9 +288,9 @@ function AddRestaurant() {
         </Button> */}
 
         <div className="justify-content-center mb-3 mt-5 ">
-        <Button className="fw-bold" variant="primary" type="submit" onClick={handleSubmit} >
-  Inserisci ristorante <IoAddSharp />
-</Button>
+          <Button className="fw-bold" variant="primary" type="submit" onClick={handleSubmit} >
+            Inserisci ristorante <IoAddSharp />
+          </Button>
         </div>
       </Form>
     </div>

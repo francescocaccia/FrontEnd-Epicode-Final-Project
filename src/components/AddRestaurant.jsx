@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createRestaurant } from "../redux/actions";
 import { Button, Form } from "react-bootstrap";
 import { GrRestaurant } from "react-icons/gr";
@@ -10,26 +10,32 @@ import { MdOutlineDelete, MdRestaurantMenu, MdTableRestaurant } from "react-icon
 import { GiCook } from "react-icons/gi";
 import { IoIosRestaurant } from "react-icons/io";
 import { BiSolidDish } from "react-icons/bi";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function AddRestaurant() {
-  const dispatch = useDispatch();
+
   const [totaleCoperti, setTotaleCoperti] = useState("");
   const [tipoCucina, setTipoCucina] = useState("");
   const [menu, setMenu] = useState([{ nomePiatto: "", prezzo: "" }]);
   const [luogo, setLuogo] = useState({ regione: "", citta: "", indirizzo: "", numeroCivico: "" });
   const [cardImmagini, setCardImmagini] = useState([""]);
   const [nomeRistorante, setNomeRistorante] = useState("");
+  const [token, setToken] = useState("");
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+
 
 
   const tipoCucinaOptions = [
-    "Cucina italiana",
-    "Cucina indiana",
-    "Cucina di pesce",
-    "Stak house",
-    "Cucina vegana",
-    "Cucina vegetariana",
-    "Cucina libanese"
-  ];
+    "cucina_italiana",
+    "cucina_indiana",
+    "cucina_di_pesce",
+    "steak_house",
+    "cucina_vegana",
+    "cucina_vegetariana",
+    "cucina_libanese",
+  ]
 
 
   const regioneOptions = [
@@ -91,53 +97,67 @@ function AddRestaurant() {
     setMenu(updatedMenu);
   };
 
- 
+
 
   const showDeleteButton = cardImmagini.length > 1;
+  useEffect(() => { setToken(localStorage.getItem("token")) },
+    [])
+
 
   const handleSubmit = (event) => {
     const restaurantData = {
+      nomeRistorante: nomeRistorante,
       totaleCoperti: Number(totaleCoperti),
       tipoCucina,
-      menu: {
-        piatti: menu,
-      },
       luogo: {
         regione: luogo.regione,
         citta: luogo.citta,
         indirizzo: luogo.indirizzo,
         numeroCivico: luogo.numeroCivico,
       },
+      menu: {
+        piatti: menu.map(item => ({
+          nomePiatto: item.nomePiatto,
+          prezzo: item.prezzo
+        }))
+      },
       cardImmagini: {
         immagine1: cardImmagini[0],
         immagine2: cardImmagini[1],
-        immagine3: cardImmagini[2],
+        immagine3: cardImmagini[2]
       },
     };
+    aggiungiRistorante(restaurantData);
+    navigate("/");
+  }
 
-    const token = localStorage.getItem("token");
 
-    fetch("http://localhost:8080/ristoranti/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+    const aggiungiRistorante = async (restaurantData) => {
 
-      },
-      body: JSON.stringify(restaurantData),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      try{
+        let resp = await fetch("http://localhost:8080/ristoranti/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+    
+          body: JSON.stringify(restaurantData),
+        });
+        if(resp.ok){
+          alert("ristornate inserito");
+        }else{
+          alert("errore nell'inserimento del ristorante");
+        }
+      }catch(error){
+        console.log(error);
+      }
+
 
     dispatch(createRestaurant(restaurantData));
-    event.preventDefault();
+ 
   };
-
+  
   return (
     <div className="container mt-5 text-center fw-bold">
       <GrRestaurant className="fs-1" />
@@ -173,21 +193,23 @@ function AddRestaurant() {
           </Form.Label>
           <Form.Control
             as="select"
-            value={luogo.regione}
-            onChange={e => setLuogo({ ...luogo, regione: e.target.value })}
+            value={tipoCucina}
+            onChange={e => setTipoCucina(e.target.value)}
             required
           >
-            <option value="">Tipo cucina - selezioan un opzione</option>
+            <option value="">Tipo cucina - seleziona un opzione</option>
             {tipoCucinaOptions.map(option => (
               <option key={option} value={option}>
                 {option}
               </option>
             ))}
           </Form.Control>
+
         </Form.Group>
         <p className="mt-3">
           Menù <MdRestaurantMenu />
         </p>
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++
         {menu.map((item, index) => (
           <Form.Group className="mb-3" controlId={`menu-${index}`} key={index}>
             <Form.Label>
@@ -226,7 +248,7 @@ function AddRestaurant() {
             Luogo
             <FaMapMarkerAlt />
           </Form.Label>
-          {/* <Form.Group className="mb-3" controlId="regione"> */}
+
           <Form.Control
             as="select"
             value={luogo.regione}
@@ -256,7 +278,7 @@ function AddRestaurant() {
             required
           />
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Numero civico"
             value={luogo.numeroCivico}
             onChange={e => setLuogo({ ...luogo, numeroCivico: e.target.value })}

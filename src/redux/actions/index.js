@@ -71,8 +71,8 @@ export const getUserLoggedAction = () => {
 };
 
 
-export const getRistorantiAction = () => {
-  const url = "http://localhost:3001/ristoranti/all";
+/* export const getRistorantiAction = () => {
+  const url = "http://localhost:8080/ristoranti/all";
   return async dispatch => {
     try {
       let resp = await fetch(url);
@@ -86,3 +86,40 @@ export const getRistorantiAction = () => {
     }
   };
 };
+*/
+
+
+export const searchRestaurants = (city, restaurantName) => {
+  return async dispatch => {
+    try {
+      let url = 'http://localhost:8080/ristoranti?';
+      
+      if (city) {
+        url += `luogo=${city}&`;
+      }
+      
+      if (restaurantName) {
+        url += `nomeRistorante=${restaurantName}&`;
+      }
+      
+      const response = await fetch(url);
+      
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: GET_RISTORANTI, payload: data });
+      } else {
+        throw new Error('Failed to fetch restaurants');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+
+
+
+
+
+
+

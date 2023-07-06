@@ -15,12 +15,15 @@ const ReservationRestaurant = () => {
   const [idCliente, setIdCliente] = useState(null);
   const [idRistorante, setIdRistorante] = useState(null);
   const dispatch = useDispatch();
+
+
+
+  /*
 useEffect(()=>{dispatch(getUserLoggedAction())},[]);
 const user = useSelector(state => state.home.clienteLoggato)
 useEffect(()=>{dispatch(getRistorantiAction())},[]);
 const ristoranti = useSelector(state => state.home.ristoranti)
-
-
+*/ 
   const handleSubmit = async e => {
     e.preventDefault();
     const payload = {
@@ -29,7 +32,7 @@ const ristoranti = useSelector(state => state.home.ristoranti)
       idCliente: idCliente,
       idRistorante: idRistorante,
     };
-
+ /*
   fetch(`http://localhost:8080/prenota/${user.id}/${ristoranti.id}`, {
       method: "POST",
       headers: {
@@ -51,7 +54,7 @@ const ristoranti = useSelector(state => state.home.ristoranti)
     setIdCliente(null);
     setIdRistorante(null);
   };
-
+*/ 
   return (
     <div className="container text-center fw-bold mt-3 ">
       <div className="row justify-content-center">
@@ -96,6 +99,6 @@ const ristoranti = useSelector(state => state.home.ristoranti)
       </div>
     </div>
   );
-}
+}}
 
 export default ReservationRestaurant;

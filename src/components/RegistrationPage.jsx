@@ -36,7 +36,7 @@ function RegistrationPage() {
       .then(response => {
         if (response.ok) {
           setSuccess("Registrazione eseguita con successo!");
-          // Aggiungi qui il reindirizzamento alla pagina desiderata
+          alert("login effettuato");
           return response.json();
         } else {
           throw new Error("Credenziali errate");

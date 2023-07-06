@@ -26,7 +26,7 @@ const NavbarForm = () => {
       {showSearch && (
         <Form className="d-flex">
           <Form.Control  size="sm" type="text" placeholder="Città" />
-          <Form.Control size="sm" type="text" placeholder="Tipo cucina, Nome del Ristorante" />
+          <Form.Control size="sm" type="text" placeholder="Ristorante, Tipo cucina" />
           <Button className="bg-info border-none" type="submit"><BsSearch /></Button>
         </Form>
       )}

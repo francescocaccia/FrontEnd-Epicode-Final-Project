@@ -2,29 +2,91 @@ import { Container, Row, Col, Form, Carousel, Button, Placeholder, InputGroup } 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import MyFooter from "./MyFooter";
 import AdvertisementPage from "./AdvertisementPage";
-import { Link } from "react-router-dom";
-import { searchRestaurants } from "../redux/actions";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { fetchDataSuccess } from "../redux/actions";
 
 
 function InitialFormPage() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
   const [citiesData, setCitiesData] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate()
 
+
+
+  const handleSearch = () => {
+    if (searchValue !== "" && city !== "") {
+      dispatch(getRistorantibyStringAndCity(searchValue, city));
+    } else if (city) {
+      dispatch(getRistorantiByCity(city));
+    } else if (searchValue) {
+      dispatch(getRistorantiByStringa(searchValue));
+    } else {
+      alert("inserire almeno un parametro di ricerca");
+    }
+  };
+
+  const getRistorantiByStringa = (stringa) =>{
+    let url = `http://localhost:8080/ristoranti/cerca?perStringa=${stringa}`;
+
+    return async () => {
+      try {
+        const resp = await fetch(url);
+        if (resp.ok) {
+          const data = await resp.json();
+          dispatch(fetchDataSuccess(data));
+          console.log(data);
+          navigate("/restaurant");
+        }
+      } catch (error) {
+        console.log('Si è verificato un errore:', error);
+      }
+    };
+
+  }
+
+  const getRistorantiByCity = (city) => {
+    let url = `http://localhost:8080/ristorantiluogo/citta/${city}`;
+    return async () => {
+      try {
+        const resp = await fetch(url);
+        if (resp.ok) {
+          const data = await resp.json();
+          dispatch(fetchDataSuccess(data));
+          console.log(data);
+          navigate("/restaurant");
+        }
+      } catch (error) {
+        console.log('Si è verificato un errore:', error);
+      }
+    };
+
+  }
+
+  const getRistorantibyStringAndCity = (stringa, city) =>{
+
+    console.log("endpoint da creare");
+  }
+
+  //aggiorna lo stato del dropdown ogni volta++++++++++++++
   useEffect(() => {
-    fetch('http://localhost:8080/luogo/citta')
-      .then(response => response.json())
-      .then(data => {
+    const fetchCitiesData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/luogo/citta');
+        const data = await response.json();
         setCitiesData(data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Si è verificato un errore:', error);
-      });
+      }
+    };
+
+    fetchCitiesData();
   }, []);
 
-  console.log(citiesData);
+
 
   return (
     <div>
@@ -56,8 +118,8 @@ function InitialFormPage() {
                   onChange={(e) => setCity(e.target.value)}
                 >
                   <option value="" disabled>Seleziona una città</option>
-                  {citiesData.map((cityData) => (
-                    <option key={cityData.id} value={cityData}>
+                  {citiesData.map((cityData, index) => (
+                    <option key={index} value={cityData}>
                       {cityData}
                     </option>
                   ))}
@@ -68,11 +130,11 @@ function InitialFormPage() {
               <InputGroup>
                 <Form.Control
                   type="text"
-                  placeholder="nome ristorante o tipo"
-                  value={""}
-                  onChange={(e) => (e.target.value)}
+                  placeholder="Nome ristorante o tipo"
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <Button variant="info">
+                <Button variant="info" onClick={handleSearch}>
                   Cerca
                 </Button>
               </InputGroup>

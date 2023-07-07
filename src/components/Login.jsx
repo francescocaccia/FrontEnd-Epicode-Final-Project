@@ -23,7 +23,6 @@ const Login = () => {
           "Content-Type": "application/json",
         },
       });
-
       if (response.ok) {
         const data = await response.json();
         alert("login effettuato");
@@ -33,7 +32,7 @@ const Login = () => {
           email: "",
           password: "",
         });
-
+          
         navigate("/");
 
       } else {

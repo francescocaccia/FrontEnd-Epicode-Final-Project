@@ -28,13 +28,13 @@ function AddRestaurant() {
 
 
   const tipoCucinaOptions = [
-    "cucina_italiana",
-    "cucina_indiana",
-    "cucina_di_pesce",
-    "steak_house",
-    "cucina_vegana",
-    "cucina_vegetariana",
-    "cucina_libanese",
+    "Italiana",
+    "Indiana",
+    "Pesce",
+    "Carne",
+    "Vegana",
+    "Vegetariana",
+    "Libanese",
   ]
 
 
@@ -209,7 +209,7 @@ function AddRestaurant() {
         <p className="mt-3">
           Menù <MdRestaurantMenu />
         </p>
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         {menu.map((item, index) => (
           <Form.Group className="mb-3" controlId={`menu-${index}`} key={index}>
             <Form.Label>

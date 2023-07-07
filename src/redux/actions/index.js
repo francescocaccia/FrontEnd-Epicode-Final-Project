@@ -1,4 +1,3 @@
-export const GET_RISTORANTI = "GET_RISTORANTI";
 export const SET_ADMIN = "SET_ADMIN";
 export const ADD_MENU_FIELD = "ADD_MENU_FIELD";
 export const DELETE_MENU_FIELD = "DELETE_MENU_FIELD";
@@ -6,6 +5,7 @@ export const SET_CARD_IMMAGINI = "SET_CARD_IMMAGINI";
 export const AGGIUNGI_IMMAGINE = "AGGIUNGI_IMMAGINE";
 export const CANCELLA_IMMAGINE = "CANCELLA_IMMAGINE";
 export const GET_USER_LOGGED = "GET_USER_LOGGED";
+export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 
 
 
@@ -48,6 +48,14 @@ export const cancellaImmagine = index => ({
   payload: index,
 });
 
+//action per riempire i caroselli dei ristoranti
+export const fetchDataSuccess = (data) => {
+  return {
+    type: FETCH_DATA_SUCCESS,
+    payload: data,
+  };
+};
+
 
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");
@@ -69,53 +77,6 @@ export const getUserLoggedAction = () => {
     }
   };
 };
-
-
-/* export const getRistorantiAction = () => {
-  const url = "http://localhost:8080/ristoranti/all";
-  return async dispatch => {
-    try {
-      let resp = await fetch(url);
-      if (resp.ok) {
-        let data = await resp.json();
-
-        dispatch({ type: GET_RISTORANTI, payload: data });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-*/
-
-
-export const searchRestaurants = (city, restaurantName) => {
-  return async dispatch => {
-    try {
-      let url = 'http://localhost:8080/ristoranti?';
-      
-      if (city) {
-        url += `luogo=${city}&`;
-      }
-      
-      if (restaurantName) {
-        url += `nomeRistorante=${restaurantName}&`;
-      }
-      
-      const response = await fetch(url);
-      
-      if (response.ok) {
-        const data = await response.json();
-        dispatch({ type: GET_RISTORANTI, payload: data });
-      } else {
-        throw new Error('Failed to fetch restaurants');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
 
 
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Dropdown, Nav, Navbar } from "react-bootstrap";
 import Login from "./Login";
 import { LiaUserCircle } from "react-icons/lia";
@@ -6,10 +6,29 @@ import NavbarForm from "./NavBarForm";
 import { Link } from "react-router-dom";
 
 const MyNavBar = () => {
+  const [shoWAddRestaurant, setshoWAddRestaurant] = useState(false);
+  
+  useEffect(() => {
+      if (tokenPresent()) {
+        setshoWAddRestaurant(true);
+      } else {
+        setshoWAddRestaurant(false);
+      }
+      console.log(shoWAddRestaurant);
+    }, []);
+
+  const tokenPresent = () => {
+    const token = localStorage.getItem('token');
+    if (token == null) {
+      return false;
+    }
+    return true
+  }
+
   return (
     <>
-      <div className="bg-light text-right d-flex justify-content-end p-2">
-        <Link className="text-info fs-5 text-decoration-none ms-3 text-end" to="/addRestaurant">
+      <div className="bg-light text-right d-flex justify-content-end p-2" >
+        <Link className="text-info fs-5 text-decoration-none ms-3 text-end" hidden={!shoWAddRestaurant} to="/addRestaurant">
           Registra il tuo ristorante
         </Link>
       </div>

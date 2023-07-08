@@ -4,7 +4,7 @@ import { AGGIUNGI_IMMAGINE } from "../actions";
 import { CANCELLA_IMMAGINE } from "../actions";
 import { GET_USER_LOGGED } from "../actions";
 import {FETCH_DATA_SUCCESS} from "../actions";
-
+import { SET_PROFILE } from "../actions";
 
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
   isAdmin: false,
   cardImmagini: [],
   clienteLoggato: null,
+  profile: null
 };
 
 
@@ -20,8 +21,10 @@ const homeReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MENU_FIELD:
       return [...state, { nome: "", descrizione: "" }];
+
     case DELETE_MENU_FIELD:
       return state.filter((_, index) => index !== action.payload);
+
     case AGGIUNGI_IMMAGINE:
       if (state.cardImmagini.length < 3) {
         return {
@@ -30,6 +33,7 @@ const homeReducer = (state = initialState, action) => {
         };
       }
       return state;
+
     case CANCELLA_IMMAGINE:
       return {
         ...state,
@@ -40,11 +44,18 @@ const homeReducer = (state = initialState, action) => {
         ...state,
         clienteLoggato: action.payload,
       };//fetch/azione che andra a riempire il carosello col contenuto di ritorno della get su ristoranti/nome/tipoCucina
+
       case FETCH_DATA_SUCCESS:
         return {
           ...state,
           ristoranti: action.payload,
         };
+
+        case SET_PROFILE:
+          return {
+            ...state,
+            profile: action.payload
+          };
     default:
       return state;
   }

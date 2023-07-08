@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Nav } from "react-bootstrap";
 import { IoLogIn } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { getUserLoggedAction } from "../redux/actions";
 
 
 const Login = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
   const [login, setLogin] = useState({
     email: "",
     password: "",
@@ -25,14 +28,14 @@ const Login = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        alert("login effettuato");
+        // alert("login effettuato");
         localStorage.setItem("token", data.accessToken);
-        console.log(data.accessToken)
+        localStorage.setItem("nomeUtente", data.nomeUtente)
+        dispatch(getUserLoggedAction());
         setLogin({
           email: "",
           password: "",
         });
-          
         navigate("/");
 
       } else {
@@ -72,7 +75,7 @@ const Login = () => {
           />
         </Form.Group>
         <div className="text-center">
-          <Button variant="primary" type="submit" className="mb-3">
+          <Button variant="info" type="submit" className="mb-3 me-3">
             Login
           </Button>
           <br />

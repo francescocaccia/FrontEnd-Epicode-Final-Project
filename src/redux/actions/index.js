@@ -6,6 +6,7 @@ export const AGGIUNGI_IMMAGINE = "AGGIUNGI_IMMAGINE";
 export const CANCELLA_IMMAGINE = "CANCELLA_IMMAGINE";
 export const GET_USER_LOGGED = "GET_USER_LOGGED";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
+export const SET_PROFILE = "SET_PROFILE";
 
 
 
@@ -20,6 +21,13 @@ export const signUpUser = userData => {
   return {
     type: "SIGN_UP_USER",
     payload: userData,
+  };
+};
+
+export const setProfile = profile => {
+  return {
+    type: SET_PROFILE,
+    payload: profile
   };
 };
 
@@ -57,6 +65,13 @@ export const fetchDataSuccess = (data) => {
 };
 
 
+export const setUtenteLoggato = (data) => ({
+  type: GET_USER_LOGGED,
+  payload: data,
+}
+)
+
+
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");
   const url = "http://localhost:8080/cliente/me";
@@ -69,7 +84,7 @@ export const getUserLoggedAction = () => {
       });
       if (resp.ok) {
         let data = await resp.json();
-
+        
         dispatch({ type: GET_USER_LOGGED, payload: data });
       }
     } catch (error) {
@@ -77,7 +92,6 @@ export const getUserLoggedAction = () => {
     }
   };
 };
-
 
 
 

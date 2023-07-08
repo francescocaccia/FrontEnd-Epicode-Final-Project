@@ -4,6 +4,7 @@ import { signUpUser } from "../redux/actions";
 import { BsFacebook, BsTwitter, BsInstagram, BsGoogle } from "react-icons/bs";
 import { GiItalia, GiMeal } from "react-icons/gi";
 import { Alert, Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function RegistrationPage() {
   const dispatch = useDispatch();
@@ -15,8 +16,9 @@ function RegistrationPage() {
   const [isRistoratore, setIsRistoratore] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  const navigate = useNavigate();
   const handleClick = () => {
+  
     const userData = {
       nome: nome,
       cognome: cognome,
@@ -43,9 +45,8 @@ function RegistrationPage() {
         }
       })
       .then(data => {
-        console.log(data);
         dispatch(signUpUser(userData));
-        window.location.href = "/";
+        navigate("/");
       })
       .catch(error => {
         console.error(error);

@@ -7,6 +7,8 @@ import RestaurantPage from "./components/RestaurantPage";
 import RegistrationPage from "./components/RegistrationPage";
 import AddRestaurant from "./components/AddRestaurant";
 import ReservationRestaurant from "./components/ReservationRestaurant";
+import ProfilePage from "./components/ProfilePage";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/registrationPage" element={<RegistrationPage />} />
         <Route path="/addRestaurant" element={<AddRestaurant />} />
         <Route path="/reservationRestaurant" element={<ReservationRestaurant />} />
+        <Route path="/profilePage" element={<ProfilePage/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   );

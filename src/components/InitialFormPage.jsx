@@ -1,12 +1,12 @@
-import { Container, Row, Col, Form, Carousel, Button, Placeholder, InputGroup } from "react-bootstrap";
+import { Container, Row, Col, Form, Carousel, Button, InputGroup } from "react-bootstrap";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import MyFooter from "./MyFooter";
 import AdvertisementPage from "./AdvertisementPage";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchDataSuccess } from "../redux/actions";
-
+import { getUserLoggedAction } from "../redux/actions";
 
 function InitialFormPage() {
   const dispatch = useDispatch();
@@ -15,6 +15,11 @@ function InitialFormPage() {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate()
 
+  const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
+  //111111  console log per evdere dati in console++++++++++++++++
+  useEffect(() => {
+    console.log(utenteLoggato);
+  }, [utenteLoggato]);
 
 
   const handleSearch = () => {
@@ -29,7 +34,7 @@ function InitialFormPage() {
     }
   };
 
-  const getRistorantiByStringa = (stringa) =>{
+  const getRistorantiByStringa = (stringa) => {
     let url = `http://localhost:8080/ristoranti/cerca?perStringa=${stringa}`;
 
     return async () => {
@@ -38,7 +43,7 @@ function InitialFormPage() {
         if (resp.ok) {
           const data = await resp.json();
           dispatch(fetchDataSuccess(data));
-          console.log(data);
+          // console.log(data);
           navigate("/restaurant");
         }
       } catch (error) {
@@ -49,7 +54,7 @@ function InitialFormPage() {
   }
 
   const getRistorantiByCity = (city) => {
-    let url = `http://localhost:8080/ristorantiluogo/citta/${city}`;
+    let url = `http://localhost:8080/ristoranti/luogo/citta/${city}`;
     return async () => {
       try {
         const resp = await fetch(url);
@@ -66,8 +71,8 @@ function InitialFormPage() {
 
   }
 
-  const getRistorantibyStringAndCity = (stringa, city) =>{
-
+  const getRistorantibyStringAndCity = (stringa, city) => {
+//endpoint da creare
     console.log("endpoint da creare");
   }
 

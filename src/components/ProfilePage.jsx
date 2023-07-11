@@ -1,20 +1,59 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setUtenteLoggato } from "../redux/actions";
+import { deleteRistorante, getUserLoggedAction, setUtenteLoggato } from "../redux/actions";
 
 
 const ProfilePage = () => {
+
     const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
     const navigate = useNavigate();
-    let dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const [token, setToken] = useState("");
+
     const handleLogout = () => {
-        localStorage.clear();
-        dispatch(setUtenteLoggato(null));
-        alert("Logout effettuato")
-        navigate("/");
-    }
+        if (localStorage.getItem("token")) {
+            localStorage.clear();
+            dispatch(setUtenteLoggato(null));
+            alert("Logout effettuato");
+            navigate("/");
+        }
+    };
+
+
+    useEffect(() => {
+        dispatch(getUserLoggedAction());
+
+    }, []);
+
+
+    useEffect(() => { setToken(localStorage.getItem("token")) },
+        [])
+
+
+
+    const removeRestaurant = async (ristoranteId) => {
+        const URL = `http://localhost:8080/ristoranti/delete/${ristoranteId}`;
+        const headers = {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        };
+        try {
+            const risposta = await fetch(URL, headers);
+            if (risposta.ok) {
+                alert("ristorante eliminato: " + ristoranteId);
+                dispatch(deleteRistorante(ristoranteId));
+                dispatch(getUserLoggedAction())
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <Container className="profile-container">
             <Row className="justify-content-center">
@@ -42,6 +81,14 @@ const ProfilePage = () => {
                         <p className="email">Email: {utenteLoggato.email}</p>
                         <p className="phone ">Numero di telefono: {utenteLoggato.numeroTelefono}</p>
                         <p className="user-id">ID Utente: {utenteLoggato.id}</p>
+                        {utenteLoggato && utenteLoggato.ristorante && utenteLoggato.ristorante.map((ristorante) => (
+                            <div key={ristorante.id} className="ristorante-item">
+                                <h6>proprietario del/dei Ristoranti</h6>
+                                <p>{ristorante.nomeRistorante}</p>
+                                <p>{ristorante.id}</p>
+                                <Button onClick={() => removeRestaurant(ristorante.id)} className='bg-primary'>Elimina</Button>
+                            </div>
+                        ))}
                         <p className="role">Ruolo: {utenteLoggato.role}</p>
                         <Button variant="danger" onClick={handleLogout} className="logout-button mb-5">
                             Logout

@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { Button, Form, Nav } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { IoLogIn } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserLoggedAction } from "../redux/actions";
 
 
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
+  const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
   const [login, setLogin] = useState({
     email: "",
     password: "",
@@ -28,7 +29,7 @@ const Login = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        // alert("login effettuato");
+        alert("login effettuato");
         localStorage.setItem("token", data.accessToken);
         localStorage.setItem("nomeUtente", data.nomeUtente)
         dispatch(getUserLoggedAction());

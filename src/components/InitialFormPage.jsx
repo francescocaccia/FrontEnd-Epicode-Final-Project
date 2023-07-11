@@ -16,54 +16,44 @@ function InitialFormPage() {
   const navigate = useNavigate()
 
   const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
-  //111111  console log per evdere dati in console++++++++++++++++
+
   useEffect(() => {
     console.log(utenteLoggato);
   }, [utenteLoggato]);
 
 
   const handleSearch = () => {
-    if (searchValue !== "" && city !== "") {
-      dispatch(getRistorantibyStringAndCity(searchValue, city));
-    } else if (city) {
-      dispatch(getRistorantiByCity(city));
-    } else if (searchValue) {
-      dispatch(getRistorantiByStringa(searchValue));
-    } else {
-      alert("inserire almeno un parametro di ricerca");
-    }
+ 
+   dispatch(getRistorantibyStringAndCity(searchValue, city));
+    
   };
 
-  const getRistorantiByStringa = (stringa) => {
-    let url = `http://localhost:8080/ristoranti/cerca?perStringa=${stringa}`;
+
+  const getRistorantibyStringAndCity = (stringa, city) => {
+
+    let minuscolo = stringa.toLowerCase();
+    let primaMaiuscola = minuscolo.charAt(0).toUpperCase() + minuscolo.slice(1);
+    let url =`http://localhost:8080/ristoranti/cerca`
+    if(primaMaiuscola !=="" && city !== ""){
+      url = url + `?perStringa=${primaMaiuscola}&citta=${city}`
+    }else if(primaMaiuscola !== ""){
+      url = url + `?perStringa=${primaMaiuscola}`
+    }else{
+      url = url + `?citta=${city}`
+    }
 
     return async () => {
       try {
         const resp = await fetch(url);
         if (resp.ok) {
           const data = await resp.json();
-          dispatch(fetchDataSuccess(data));
-          // console.log(data);
-          navigate("/restaurant");
-        }
-      } catch (error) {
-        console.log('Si è verificato un errore:', error);
-      }
-    };
-
-  }
-
-  const getRistorantiByCity = (city) => {
-    let url = `http://localhost:8080/ristoranti/luogo/citta/${city}`;
-    return async () => {
-      try {
-        const resp = await fetch(url);
-        if (resp.ok) {
-          const data = await resp.json();
+          if(data.length !== 0){
           dispatch(fetchDataSuccess(data));
           console.log(data);
           navigate("/restaurant");
-        }
+          }else{
+            alert("non sono stati trovati ristoranti con questi parametri")
+          }}
       } catch (error) {
         console.log('Si è verificato un errore:', error);
       }
@@ -71,10 +61,7 @@ function InitialFormPage() {
 
   }
 
-  const getRistorantibyStringAndCity = (stringa, city) => {
-//endpoint da creare
-    console.log("endpoint da creare");
-  }
+
 
   //aggiorna lo stato del dropdown ogni volta++++++++++++++
   useEffect(() => {
@@ -122,7 +109,7 @@ function InitialFormPage() {
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                 >
-                  <option value="" disabled>Seleziona una città</option>
+                  <option value="" >Seleziona una città</option>
                   {citiesData.map((cityData, index) => (
                     <option key={index} value={cityData}>
                       {cityData}
@@ -139,7 +126,7 @@ function InitialFormPage() {
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <Button variant="info" onClick={handleSearch}>
+                <Button variant="info" disabled={!city && !searchValue} onClick={handleSearch}>
                   Cerca
                 </Button>
               </InputGroup>

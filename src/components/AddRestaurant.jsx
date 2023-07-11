@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createRestaurant } from "../redux/actions";
 import { Button, Form } from "react-bootstrap";
 import { GrRestaurant } from "react-icons/gr";
@@ -13,7 +13,7 @@ import { BiSolidDish } from "react-icons/bi";
 import { Navigate, useNavigate } from "react-router-dom";
 
 function AddRestaurant() {
-
+  const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
   const [totaleCoperti, setTotaleCoperti] = useState("");
   const [tipoCucina, setTipoCucina] = useState("");
   const [menu, setMenu] = useState([{ nomePiatto: "", prezzo: "" }]);
@@ -99,11 +99,13 @@ function AddRestaurant() {
 
 
 
+
+  
   const showDeleteButton = cardImmagini.length > 1;
+ 
+
   useEffect(() => { setToken(localStorage.getItem("token")) },
-    [])
-
-
+  [])
   const handleSubmit = (event) => {
     const restaurantData = {
       nomeRistorante: nomeRistorante,
@@ -126,6 +128,7 @@ function AddRestaurant() {
         immagine2: cardImmagini[1],
         immagine3: cardImmagini[2]
       },
+      emailProprietario: utenteLoggato.email
     };
     aggiungiRistorante(restaurantData);
     navigate("/");
@@ -143,11 +146,13 @@ function AddRestaurant() {
           },
     
           body: JSON.stringify(restaurantData),
+
         });
         if(resp.ok){
           alert("ristornate inserito");
         }else{
           alert("errore nell'inserimento del ristorante");
+          console.log("errore" + resp);
         }
       }catch(error){
         console.log(error);
@@ -155,7 +160,7 @@ function AddRestaurant() {
 
 
     dispatch(createRestaurant(restaurantData));
- 
+
   };
   
   return (

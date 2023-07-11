@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Dropdown, Nav, Navbar } from "react-bootstrap";
+import { Container, Dropdown, Nav, Navbar } from "react-bootstrap";
 import Login from "./Login";
 import { LiaUserCircle } from "react-icons/lia";
 import NavbarForm from "./NavBarForm";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ProfilePage from "./ProfilePage";
+
 
 
 const MyNavBar = () => {
@@ -55,7 +55,6 @@ const MyNavBar = () => {
             <Nav className="me-auto">
               <Link className="nav-link" to={"/"}>Home</Link>
               <Link className="nav-link" to={"/restaurant"}>Restaurant</Link>
-              <Link className="nav-link" to={"/registrationPage"}>Contact</Link>
             </Nav>
             <NavbarForm />
             <Nav className="ms-auto">

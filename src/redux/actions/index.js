@@ -7,7 +7,7 @@ export const CANCELLA_IMMAGINE = "CANCELLA_IMMAGINE";
 export const GET_USER_LOGGED = "GET_USER_LOGGED";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 export const SET_PROFILE = "SET_PROFILE";
-
+export const DELETE_RISTORANTE = "DELETE_RISTORANTE";
 
 
 export const setAdmin = isAdmin => {
@@ -70,7 +70,12 @@ export const setUtenteLoggato = (data) => ({
   payload: data,
 }
 )
-
+export const deleteRistorante = (ristoranteId) => {
+  return {
+    type: DELETE_RISTORANTE,
+    payload: ristoranteId,
+  };
+};
 
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");

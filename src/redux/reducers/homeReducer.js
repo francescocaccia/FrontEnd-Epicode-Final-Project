@@ -1,13 +1,14 @@
-import { ADD_MENU_FIELD } from "../actions";
+import { ADD_MENU_FIELD} from "../actions";
 import { DELETE_MENU_FIELD } from "../actions";
 import { AGGIUNGI_IMMAGINE } from "../actions";
 import { CANCELLA_IMMAGINE } from "../actions";
 import { GET_USER_LOGGED } from "../actions";
 import {FETCH_DATA_SUCCESS} from "../actions";
 import { SET_PROFILE } from "../actions";
-
+import {DELETE_RISTORANTE} from "../actions";
 
 const initialState = {
+
   ristoranti: [],
   isAdmin: false,
   cardImmagini: [],
@@ -43,7 +44,7 @@ const homeReducer = (state = initialState, action) => {
       return {
         ...state,
         clienteLoggato: action.payload,
-      };//fetch/azione che andra a riempire il carosello col contenuto di ritorno della get su ristoranti/nome/tipoCucina
+      };
 
       case FETCH_DATA_SUCCESS:
         return {
@@ -56,6 +57,16 @@ const homeReducer = (state = initialState, action) => {
             ...state,
             profile: action.payload
           };
+
+          case DELETE_RISTORANTE:
+            const ristoranteId = action.payload;
+            const updatedRistoranti = state.ristoranti.filter(
+              (ristorante) => ristorante.id !== ristoranteId    /*  (ristorante) => ristorante.id !== action.payload    provali entrambi*/
+            );
+            return {
+              ...state,
+              ristoranti: updatedRistoranti,
+            };
     default:
       return state;
   }

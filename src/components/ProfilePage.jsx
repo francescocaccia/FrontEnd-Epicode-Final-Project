@@ -55,7 +55,7 @@ const ProfilePage = () => {
     };
 
     return (
-        <Container className="profile-container">
+        <Container className="profile-container mb-5">
             <Row className="justify-content-center">
                 <Col xs={12} sm={6} md={4} className="text-center mb-5">
                     <img

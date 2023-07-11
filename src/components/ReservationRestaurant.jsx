@@ -7,22 +7,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const ReservationRestaurant = () => {
-  const { id, nomeRistorante } = useParams();
+  const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
+
+  const { restaurantId } = useParams();
+  console.log("l'id di questo ristorante è: " + restaurantId);
   const [dataPrenotazione, setDataPrenotazione] = useState("");
+  const [orarioPrenotazione, setOrarioPrenotazione] = useState("");
   const [numeroPersone, setNumeroPersone] = useState(1);
-  const [idCliente, setIdCliente] = useState(null);
-  const [idRistorante, setIdRistorante] = useState(null);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
-      dataPrenotazione: dataPrenotazione,
-      numeroPersone: numeroPersone,
-      idCliente: idCliente,
-      idRistorante: idRistorante,
+      dataPrenotazione,
+      orarioPrenotazione,
+      numeroPersone,
+      idCliente: utenteLoggato.id,
+      idRistorante: restaurantId,
     };
 
+  
   };
 
   return (
@@ -32,8 +36,6 @@ const ReservationRestaurant = () => {
           <h3 className="mb-3">
             Prenota ristorante
           </h3>
-          <h5 className="mb-3">{nomeRistorante}</h5>
-          <h5 className="mb-3">{id}</h5>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="dataPrenotazione">
               <Form.Label>
@@ -43,6 +45,17 @@ const ReservationRestaurant = () => {
                 type="date"
                 value={dataPrenotazione}
                 onChange={(e) => setDataPrenotazione(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="orarioPrenotazione">
+              <Form.Label>
+                Orario prenotazione
+              </Form.Label>
+              <Form.Control
+                type="time"
+                value={orarioPrenotazione}
+                onChange={(e) => setOrarioPrenotazione(e.target.value)}
                 required
               />
             </Form.Group>

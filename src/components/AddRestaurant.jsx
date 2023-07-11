@@ -231,6 +231,7 @@ function AddRestaurant() {
             <Form.Control
               type="number"
               placeholder="Prezzo"
+              min="1"
               value={item.prezzo}
               onChange={e => handleChangeMenu(index, "prezzo", e.target.value)}
               required
@@ -284,6 +285,7 @@ function AddRestaurant() {
           />
           <Form.Control
             type="number"
+            min="1"
             placeholder="Numero civico"
             value={luogo.numeroCivico}
             onChange={e => setLuogo({ ...luogo, numeroCivico: e.target.value })}

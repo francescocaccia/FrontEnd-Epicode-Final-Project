@@ -77,6 +77,9 @@ export const deleteRistorante = (ristoranteId) => {
   };
 };
 
+
+
+
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");
   const url = "http://localhost:8080/cliente/me";
@@ -100,6 +103,27 @@ export const getUserLoggedAction = () => {
 
 
 
+
+// fetch prenotazione ristorante
+
+
+// const submitReservation = async (clientId, restaurantId, date, time) => {
+//   const token = localStorage.getItem("token");
+//   const url = await fetch('http://localhost:8080/cliente/me', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       clientId,
+//       restaurantId,
+//       date,
+//       time
+//     })
+//   });
+//   const data = await response.json();
+//   // gestisci la risposta del server
+// }
 
 
 

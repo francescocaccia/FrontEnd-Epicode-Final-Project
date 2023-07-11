@@ -19,7 +19,7 @@ function App() {
         <Route path="/restaurant" element={<RestaurantPage />} />
         <Route path="/registrationPage" element={<RegistrationPage />} />
         <Route path="/addRestaurant" element={<AddRestaurant />} />
-        <Route path="/reservationRestaurant" element={<ReservationRestaurant />} />
+        <Route path="/reservationRestaurant/:restaurantId" element={<ReservationRestaurant />} />
         <Route path="/profilePage" element={<ProfilePage/>}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>

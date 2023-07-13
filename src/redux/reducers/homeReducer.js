@@ -1,4 +1,4 @@
-import { ADD_MENU_FIELD} from "../actions";
+import { ADD_MENU_FIELD, DELETE_RESERVATION} from "../actions";
 import { DELETE_MENU_FIELD } from "../actions";
 import { AGGIUNGI_IMMAGINE } from "../actions";
 import { CANCELLA_IMMAGINE } from "../actions";
@@ -13,7 +13,8 @@ const initialState = {
   isAdmin: false,
   cardImmagini: [],
   clienteLoggato: null,
-  profile: null
+  profile: null,
+  reservation: []
 };
 
 
@@ -61,12 +62,17 @@ const homeReducer = (state = initialState, action) => {
           case DELETE_RISTORANTE:
             const ristoranteId = action.payload;
             const updatedRistoranti = state.ristoranti.filter(
-              (ristorante) => ristorante.id !== ristoranteId    /*  (ristorante) => ristorante.id !== action.payload    provali entrambi*/
+              (ristorante) => ristorante.id !== ristoranteId    
             );
             return {
               ...state,
               ristoranti: updatedRistoranti,
             };
+            case DELETE_RESERVATION:
+      return {
+        ...state,
+        reservation: state.reservation.filter((reservation) => reservation.idPrenotazione !== action.payload),
+      };
     default:
       return state;
   }

@@ -6,7 +6,7 @@ const NavbarForm = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
+      if (window.scrollY > 500) {
         setShowSearch(true);
       } else {
         setShowSearch(false);
@@ -22,14 +22,17 @@ const NavbarForm = () => {
 
   return (
     <div className={`bg-light text-right d-flex justify-content-end p-1 ${showSearch ? "show-search" : ""}`}>
-      {showSearch && (
-        <Form className="d-flex">
-          <Form.Control  size="sm" type="text" placeholder="Città" />
-          <Form.Control size="sm" type="text" placeholder="Ristorante, Tipo cucina" />
-          <Button className="bg-info border-none" type="submit"><BsSearch /></Button>
-        </Form>
-      )}
-    </div>
+    {showSearch && (
+      <Form className="d-flex search-form">
+        <Form.Control size="sm" type="text" placeholder="Città" />
+        <Form.Control size="sm" type="text" placeholder="Ristorante, Tipo cucina" />
+        <Button type="submit">
+          <BsSearch />
+        </Button>
+      </Form>
+    )}
+  </div>
+  
   );
 };
 

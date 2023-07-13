@@ -12,26 +12,28 @@ function AdvertisementPage() {
             <Link to="/reservationRestaurant" className="custom-link text-decoration-none text-dark">
               <Card style={{ width: "100%" }}>
                 <Card.Img
-                  src="https://magazine.misya.info/wp-content/uploads/2018/07/bottura-1024x682.jpg"
+                  src="https://www.sushicorner.it/wp-content/uploads/2021/05/CORNER-ROLL.jpg"
                   alt="Item 1"
+                  style={{ height: '200px', objectFit: 'cover' }}
                 />
                 <Card.Body>
-                  <Card.Title>Card 1</Card.Title>
-                  <Card.Text>Description for Card 1</Card.Text>
+                  <Card.Title>Sushi Corner</Card.Title>
+                  <Card.Text>Senigallia</Card.Text>
                 </Card.Body>
               </Card>
             </Link>
           </div>
           <div className="col-sm-6 col-md-3 col-lg-3 mb-4">
             <Link to="/reservationRestaurant" className="custom-link text-decoration-none text-dark">
-              <Card style={{ width: "100%" }}>
+              <Card style={{ width: "100%", }}>
                 <Card.Img
-                  src="https://gr-images.viamichelin.com/images/michelin_guide/max/236541_pro_9.jpg"
+                  src="https://media-cdn.tripadvisor.com/media/photo-p/0f/c0/42/6d/fiorentina.jpg"
                   alt="Item 2"
+                  style={{ height: '200px', objectFit: 'cover' }}
                 />
                 <Card.Body>
-                  <Card.Title>Card 2</Card.Title>
-                  <Card.Text>Description for Card 2</Card.Text>
+                  <Card.Title>Da Benito</Card.Title>
+                  <Card.Text>Orentano (PI)</Card.Text>
                 </Card.Body>
               </Card>
             </Link>
@@ -40,12 +42,13 @@ function AdvertisementPage() {
             <Link to="/reservationRestaurant" className="custom-link text-decoration-none text-dark">
               <Card style={{ width: "100%" }}>
                 <Card.Img
-                  src="https://th.bing.com/th/id/OIP.T6Ps0-3RdiPgPoxvku7w1gAAAA?pid=ImgDet&rs=1"
+                  src="https://tse1.mm.bing.net/th/id/OIP.Ki5MZY89_ZR5h1GaYOoyYgAAAA?pid=ImgDet&w=207&h=207&c=7&dpr=1,3"
                   alt="Item 3"
+                  style={{ height: '200px', objectFit: 'cover' }}
                 />
                 <Card.Body>
-                  <Card.Title>Card 3</Card.Title>
-                  <Card.Text>Description for Card 3</Card.Text>
+                  <Card.Title>Il Tartufo</Card.Title>
+                  <Card.Text>Acqualagna (PU)</Card.Text>
                 </Card.Body>
               </Card>
             </Link>
@@ -54,12 +57,13 @@ function AdvertisementPage() {
             <Link to="/reservationRestaurant" className="custom-link text-decoration-none text-dark">
               <Card style={{ width: "100%" }}>
                 <Card.Img
-                  src="https://th.bing.com/th/id/OIP.T6Ps0-3RdiPgPoxvku7w1gAAAA?pid=ImgDet&rs=1"
+                  src="https://media-cdn.tripadvisor.com/media/photo-s/0a/71/e6/8e/carne-salada-di-black.jpg"
                   alt="Item 4"
+                  style={{ height: '200px', objectFit: 'cover' }}
                 />
                 <Card.Body>
-                  <Card.Title>Card 4</Card.Title>
-                  <Card.Text>Description for Card 4</Card.Text>
+                  <Card.Title>La Giandrina</Card.Title>
+                  <Card.Text>Matelica (MC)</Card.Text>
                 </Card.Body>
               </Card>
             </Link>

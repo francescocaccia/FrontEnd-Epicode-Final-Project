@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDataSuccess } from "../redux/actions";
 import { getUserLoggedAction } from "../redux/actions";
-
+import sfondo from "../sfondo.png";
 function InitialFormPage() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
@@ -18,14 +18,14 @@ function InitialFormPage() {
   const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
 
   useEffect(() => {
-    console.log(utenteLoggato);
+
   }, [utenteLoggato]);
 
 
   const handleSearch = () => {
- 
-   dispatch(getRistorantibyStringAndCity(searchValue, city));
-    
+
+    dispatch(getRistorantibyStringAndCity(searchValue, city));
+
   };
 
 
@@ -33,29 +33,29 @@ function InitialFormPage() {
 
     let minuscolo = stringa.toLowerCase();
     let primaMaiuscola = minuscolo.charAt(0).toUpperCase() + minuscolo.slice(1);
-    let url =`http://localhost:8080/ristoranti/cerca`
-    if(primaMaiuscola !=="" && city !== ""){
+    let url = `http://localhost:8080/ristoranti/cerca`
+    if (primaMaiuscola !== "" && city !== "") {
       url = url + `?perStringa=${primaMaiuscola}&citta=${city}`
-    }else if(primaMaiuscola !== ""){
+    } else if (primaMaiuscola !== "") {
       url = url + `?perStringa=${primaMaiuscola}`
-    }else{
+    } else {
       url = url + `?citta=${city}`
     }
 
     return async () => {
       try {
-        const resp = await fetch(url);
+        const resp = await fetch(url)
         if (resp.ok) {
           const data = await resp.json();
-          if(data.length !== 0){
-          dispatch(fetchDataSuccess(data));
-          console.log(data);
-          navigate("/restaurant");
-          }else{
+          if (data.length !== 0) {
+            dispatch(fetchDataSuccess(data));
+            navigate("/restaurant");
+          } else {
             alert("non sono stati trovati ristoranti con questi parametri")
-          }}
+          }
+        }
       } catch (error) {
-        console.log('Si è verificato un errore:', error);
+        alert('Si è verificato un errore:', error);
       }
     };
 
@@ -72,7 +72,7 @@ function InitialFormPage() {
         const data = await response.json();
         setCitiesData(data);
       } catch (error) {
-        console.error('Si è verificato un errore:', error);
+        alert('Si è verificato un errore:', error);
       }
     };
 
@@ -85,8 +85,7 @@ function InitialFormPage() {
     <div>
       <div
         style={{
-          backgroundImage:
-            "url('https://image.freepik.com/foto-gratuito/gustosi-ingredienti-freschi-appetitosi-di-cibo-italiano-su-sfondo-scuro_1220-1741.jpg')",
+          backgroundImage: `url(${sfondo})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "absolute",
@@ -101,7 +100,7 @@ function InitialFormPage() {
         <Row>
           <Col xs={12} md={8} lg={12}>
             <h2 className="text-light">Scopri e prenota i migliori ristoranti</h2>
-            <FloatingLabel controlId="floatingInput" className="mb-3">
+            <FloatingLabel controlId="floatingInput" className="mb-3 home-search-form">
               <InputGroup>
                 <Form.Control
                   type="text"
@@ -119,7 +118,7 @@ function InitialFormPage() {
                 </Form.Control>
               </InputGroup>
             </FloatingLabel>
-            <FloatingLabel controlId="floatingInput" className="mt-3">
+            <FloatingLabel controlId="floatingInput" className="mt-3 home-search-form">
               <InputGroup>
                 <Form.Control
                   type="text"
@@ -135,6 +134,7 @@ function InitialFormPage() {
           </Col>
         </Row>
       </Container>
+
       <div
         style={{
           position: "absolute",
@@ -208,7 +208,7 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://www.lucianopignataro.it/wp-content/uploads/2016/06/unnamed-6-e1465852643536.jpg"
+                    src="https://www.ilgiornaledelcibo.it/wp-content/uploads/2017/08/uliassi-senigallia.jpg"
                     alt="Ristorante 6"
                   />
                   <Carousel.Caption>
@@ -248,13 +248,18 @@ function InitialFormPage() {
                   />
                   <Carousel.Caption>
                     <h3>Osteria Francescana</h3>
-                    <p>Descrizione del ristorante 3</p>
+                    <p>Modena</p>
                   </Carousel.Caption>
                 </Link>
               </Col>
             </Row>
           </Carousel.Item>
         </Carousel>
+
+
+        {/*    +++++++++++++++++++++++++++++    SECONDO CAROSELLO   YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY*/}
+
+
         <h2 className="text-dark mt-5">I must</h2>
         <Carousel className="mt-3" interval={null} indicators={false}>
           <Carousel.Item>
@@ -263,7 +268,7 @@ function InitialFormPage() {
                 <Link to="/reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://u.tfstatic.com/restaurant_photos/547/439547/169/612/cavallini-food-wine-spirits-piatto-del-giorno-787a7.jpg"
+                    src="https://www.foodconfidential.it/wp-content/uploads/2019/07/The-Court-Roma.png"
                     alt="Ristorante 1"
                   />
                 </Link>
@@ -272,7 +277,7 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://cdn.squaremile.com/gallery/5de91cc9313d9.jpeg"
+                    src="https://qul.imgix.net/d74466dd-7570-42fc-ae2b-3d17b82a0cc0/355710_sld.jpg"
                     alt="Ristorante 2"
                   />
                 </Link>
@@ -281,12 +286,12 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://u.tfstatic.com/restaurant_photos/547/439547/169/612/cavallini-food-wine-spirits-piatto-del-giorno-2f35c.jpg"
+                    src="https://media-cdn.tripadvisor.com/media/photo-s/12/e7/4f/48/roof-garden.jpg"
                     alt="Ristorante 3"
                   />
                   <Carousel.Caption>
-                    <h3>Ristorante Cavallini</h3>
-                    <p>San Severino Marche</p>
+                    <h3>Ristorante Colosseo</h3>
+                    <p>Roma</p>
                   </Carousel.Caption>
                 </Link>
               </Col>
@@ -298,7 +303,7 @@ function InitialFormPage() {
                 <Link to="/reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://www.lucianopignataro.it/wp-content/uploads/2016/06/unnamed-6-e1465852643536.jpg"
+                    src="https://cdn1.discovertuscany.com/img/food/florence/borgo-san-jacopo-ponte-vecchio.jpg?auto=compress,enhance,format&w="
                     alt="Ristorante 4"
                   />
                 </Link>
@@ -307,7 +312,7 @@ function InitialFormPage() {
                 <Link to="/reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://gipsyhomerestaurant.files.wordpress.com/2015/12/linguine-chef-antonio-cannavacciuoloc3b2.jpg?w=300"
+                    src="https://blog.scuolaleonardo.com/wp-content/uploads/2017/10/La-Menagere-2-620x420.jpg"
                     alt="Ristorante 5"
                   />
                 </Link>
@@ -316,12 +321,12 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://www.lucianopignataro.it/wp-content/uploads/2016/06/unnamed-6-e1465852643536.jpg"
+                    src="https://www.firenzemadeintuscany.com/assets/w=1500&h=740&fit=fill&f=center___images.ctfassets.net_7dc7gq8ix1ml_6XckIYSX6C9IR4iDkpRBA4_6bf4766c5c9409b1eba64a590418cdc1_cover-bucaLapi.jpg"
                     alt="Ristorante 6"
                   />
                   <Carousel.Caption>
-                    <h3>Ristorante Uliassi</h3>
-                    <p>Senigallia</p>
+                    <h3>Ristorante Al Ponte</h3>
+                    <p>Firenze</p>
                   </Carousel.Caption>
                 </Link>
               </Col>
@@ -333,7 +338,7 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://media-cdn.tripadvisor.com/media/photo-s/15/b3/36/da/local-lamb-with-burnt.jpg"
+                    src="https://static.gamberorosso.it/2020/06/club-del-doge-dellhotel-gritti-palace.jpg"
                     alt="Ristorante 7"
                   />
                 </Link>
@@ -342,7 +347,7 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://ximg.retty.me/resize/s880x880/-/retty/img_ebisu/restaurant/100000034136/archive/525056-5b865e0961848.jpg"
+                    src="https://www.venezia-help.com/wp-content/uploads/lusso-venezia-cena-copertina.jpg"
                     alt="Ristorante 8"
                   />
                 </Link>
@@ -351,12 +356,12 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://s1.at.atcdn.net/wp-content/uploads/2013/08/Entrecote-Pymble.jpg"
+                    src="https://venetosecrets.com/wp-content/uploads/2017/01/28122016-L1160665.jpg"
                     alt="Ristorante 9"
                   />
                   <Carousel.Caption>
-                    <h3>Osteria Francescana</h3>
-                    <p>Descrizione del ristorante 3</p>
+                    <h3>Ristorantino San Marco</h3>
+                    <p>Venezia</p>
                   </Carousel.Caption>
                 </Link>
               </Col>

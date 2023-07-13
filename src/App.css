@@ -10,6 +10,66 @@
   border: none;
   outline: none;
 }
+/* form contenuto nella nav bar */
+.search-form {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-form input[type="text"] {
+  border: none;
+}
+
+.search-form input[type="text"]:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.search-form input[type="text"]:last-child {
+  border-right: none;
+}
+
+.search-form button {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
+/* ------------------------            search nella home, input principale           +++++++++++++++++++ */
+.home-search-form {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.home-search-form input[type="text"],
+.home-search-form select {
+  border: none;
+}
+
+.home-search-form input[type="text"]:first-child,
+.home-search-form select:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.home-search-form input[type="text"]:last-child {
+  border-right: none;
+}
+
+.home-search-form button {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
 
 /* CAMPI INPUT */
 
@@ -60,9 +120,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Card visualizzazione ristoranti */
 #restaurantCard {
   transform: scale(1.05);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 
@@ -83,7 +144,7 @@
 
 
 
-/* +++++++card+++++++ */
+/* +++++++card+++++++ AdversamentPage */
 
 .card {
   transition: transform 0.3s;
@@ -91,6 +152,7 @@
 
 .card:hover {
   transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 

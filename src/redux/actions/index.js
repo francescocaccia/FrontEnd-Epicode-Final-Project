@@ -79,14 +79,16 @@ export const deleteRistorante = (ristoranteId) => {
   };
 };
 
-
-
 export const deleteReservation = (idPrenotazione) => {
   return {
     type: DELETE_RESERVATION,
     payload: idPrenotazione,
   };
 };
+
+
+
+
 
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");
@@ -110,32 +112,3 @@ export const getUserLoggedAction = () => {
 };
 
 
-// // azione per eseguire la fetch e memorizzare i dati nello stato di Redux
-// export const getRistorantibyStringAndCity = (stringa, city) => {
-//   return async (dispatch) => {
-//     let minuscolo = stringa.toLowerCase();
-//     let primaMaiuscola = minuscolo.charAt(0).toUpperCase() + minuscolo.slice(1);
-//     let url = `http://localhost:8080/ristoranti/cerca`
-//     if (primaMaiuscola !== "" && city !== "") {
-//       url = url + `?perStringa=${primaMaiuscola}&citta=${city}`
-//     } else if (primaMaiuscola !== "") {
-//       url = url + `?perStringa=${primaMaiuscola}`
-//     } else {
-//       url = url + `?citta=${city}`
-//     }
-
-//     try {
-//       const resp = await fetch(url)
-//       if (resp.ok) {
-//         const data = await resp.json();
-//         if (data.length !== 0) {
-//           dispatch({ type: GET_RISTORANTI_BY_STRING_AND_CITY, payload: data });
-//         } else {
-//           alert("non sono stati trovati ristoranti con questi parametri")
-//         }
-//       }
-//     } catch (error) {
-//       alert('Si è verificato un errore:', error);
-//     }
-//   };
-// }

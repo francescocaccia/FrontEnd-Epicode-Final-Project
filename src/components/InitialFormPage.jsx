@@ -347,7 +347,7 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://www.venezia-help.com/wp-content/uploads/lusso-venezia-cena-copertina.jpg"
+                    src="https://www.archibio.com/wp-content/uploads/2021/06/dove-mangiare-a-Venezia.jpg"
                     alt="Ristorante 8"
                   />
                 </Link>

@@ -3,6 +3,7 @@ import homeReducer from "../reducers/homeReducer";
 
 const rootReducer = combineReducers({
   home: homeReducer,
+  
 });
 
 const store = configureStore({

@@ -35,7 +35,7 @@ const MyNavBar = () => {
           </Link>
         </div>
       )}
-      <Navbar className="sticky-top navbar-with-shadow" bg="light" expand="lg">
+      <Navbar className="sticky-top navbar-with-shadow" bg="light" expand="lg" >
         <Container>
           <Link className="navBar-brand" to={"/"}>
             <img
@@ -45,17 +45,17 @@ const MyNavBar = () => {
               height={85}
             />
           </Link>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle   aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse  id="basic-navbar-nav">
             <Nav className="me-auto">
             
             </Nav>
             <NavbarForm />
             <Nav className="ms-auto">
               {utenteLoggato === null ? (
-                <Dropdown>
-                  <Dropdown.Toggle className="text-light btn-lg btn-block" variant="info" id="dropdown-basic">
-                    <LiaUserCircle className="text-light fs-3" />
+                <Dropdown >
+                  <Dropdown.Toggle className="text-light btn-lg btn-block" style={{backgroundColor: "#17a2b8", border: 'none' }}  id="dropdown-basic">
+                    <LiaUserCircle  className="text-light fs-3" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu style={{ right: "0", left: "auto" }}>
                     <Login />

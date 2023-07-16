@@ -88,7 +88,7 @@
 
 
 
-/* primo carosello */
+/* primo carosello in home/initialFormPage */
 .carousel-caption {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
@@ -108,7 +108,7 @@
 }
 
 
-/* secondo carosello */
+/* secondo carosello  in home/initialFormPage*/
 
 .custom-carousel {
   width: 300px;
@@ -121,7 +121,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Card visualizzazione ristoranti */
+/* Card visualizzazione restaurantPage*/
 #restaurantCard {
   transform: scale(1.05);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
@@ -181,14 +181,34 @@
   margin-top: 20px;
 }
 
-
+/* ++++++++++++++ */
 
 
 /* rating stelline recensione */
-/* styles.css */
+
 .star-active {
   color:  yellow;
 }
 .star-inactive {
   color: #a9a9a9;
+}
+
+/* pulsante aggiungi ristorante, footer */
+.sharp-corners {
+  border-radius: 0;
+}
+
+
+/* prenota i migliori ristoranti  titolo footer*/
+.title-container {
+  background-color: black;
+  padding: 0.4rem;
+}
+
+
+
+/* ChiliLoversSection */
+.card-img {
+  height: 130px;
+  object-fit: cover;
 }

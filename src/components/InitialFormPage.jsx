@@ -260,7 +260,7 @@ function InitialFormPage() {
         {/*    +++++++++++++++++++++++++++++    SECONDO CAROSELLO   YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY*/}
 
 
-        <h2 className="text-dark mt-5">I must</h2>
+        <h2 className="text-dark mt-5">I Must</h2>
         <Carousel className="mt-3" interval={null} indicators={false}>
           <Carousel.Item>
             <Row>
@@ -268,7 +268,7 @@ function InitialFormPage() {
                 <Link to="/reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://www.foodconfidential.it/wp-content/uploads/2019/07/The-Court-Roma.png"
+                    src="https://media.hrs.com/media/image/80/27/d7/Da_Vittorio-Brusaporto-Aussenansicht-2-477556.jpg"
                     alt="Ristorante 1"
                   />
                 </Link>
@@ -277,7 +277,7 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://qul.imgix.net/d74466dd-7570-42fc-ae2b-3d17b82a0cc0/355710_sld.jpg"
+                    src="https://www.fashioninfusion.it/wp-content/uploads/2018/02/da-vittorio-ristorazione-esterna-1024x683.jpg"
                     alt="Ristorante 2"
                   />
                 </Link>
@@ -286,11 +286,46 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://media-cdn.tripadvisor.com/media/photo-s/12/e7/4f/48/roof-garden.jpg"
+                    src="https://media-assets.lacucinaitaliana.it/photos/6356739b6046cfb35635cf08/16:9/w_1280,c_limit/Bobo%20Cerea%20che%20manteca%20i%20paccheri.jpg"
                     alt="Ristorante 3"
                   />
                   <Carousel.Caption>
-                    <h3>Ristorante Colosseo</h3>
+                    <h3>Da Vittorio</h3>
+                    <p>Bergamo</p>
+                  </Carousel.Caption>
+                </Link>
+              </Col>
+            </Row>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Row>
+              <Col xs={4}>
+                <Link to="/reservationRestaurant">
+                  <img
+                    className="d-block w-100 carousel-image"
+                    src="https://blog.stayromac.com/wp-content/uploads/2016/03/ristorante-laperloga-panorama.jpg"
+                    alt="Ristorante 4"
+                  />
+                </Link>
+              </Col>
+              <Col xs={4}>
+                <Link to="/reservationRestaurant">
+                  <img
+                    className="d-block w-100 carousel-image"
+                    src="https://www.elizabethminchilli.com/wp-content/uploads/2015/01/La_Pergola_Elizabeth_Minchilli_in_Rome-05.jpg"
+                    alt="Ristorante 5"
+                  />
+                </Link>
+              </Col>
+              <Col xs={4}>
+                <Link to="reservationRestaurant">
+                  <img
+                    className="d-block w-100 carousel-image"
+                    src="https://mojeh.com/wp-content/uploads/2022/09/Rome-Cavalieri-CE-Terrazza-degli-Aranci-Rooftop-event-space-with-view-of-Rome-1-1600x1000.jpg"
+                    alt="Ristorante 6"
+                  />
+                  <Carousel.Caption>
+                    <h3>La Pergola</h3>
                     <p>Roma</p>
                   </Carousel.Caption>
                 </Link>
@@ -300,45 +335,10 @@ function InitialFormPage() {
           <Carousel.Item>
             <Row>
               <Col xs={4}>
-                <Link to="/reservationRestaurant">
-                  <img
-                    className="d-block w-100 carousel-image"
-                    src="https://cdn1.discovertuscany.com/img/food/florence/borgo-san-jacopo-ponte-vecchio.jpg?auto=compress,enhance,format&w="
-                    alt="Ristorante 4"
-                  />
-                </Link>
-              </Col>
-              <Col xs={4}>
-                <Link to="/reservationRestaurant">
-                  <img
-                    className="d-block w-100 carousel-image"
-                    src="https://blog.scuolaleonardo.com/wp-content/uploads/2017/10/La-Menagere-2-620x420.jpg"
-                    alt="Ristorante 5"
-                  />
-                </Link>
-              </Col>
-              <Col xs={4}>
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://www.firenzemadeintuscany.com/assets/w=1500&h=740&fit=fill&f=center___images.ctfassets.net_7dc7gq8ix1ml_6XckIYSX6C9IR4iDkpRBA4_6bf4766c5c9409b1eba64a590418cdc1_cover-bucaLapi.jpg"
-                    alt="Ristorante 6"
-                  />
-                  <Carousel.Caption>
-                    <h3>Ristorante Al Ponte</h3>
-                    <p>Firenze</p>
-                  </Carousel.Caption>
-                </Link>
-              </Col>
-            </Row>
-          </Carousel.Item>
-          <Carousel.Item>
-            <Row>
-              <Col xs={4}>
-                <Link to="reservationRestaurant">
-                  <img
-                    className="d-block w-100 carousel-image"
-                    src="https://static.gamberorosso.it/2020/06/club-del-doge-dellhotel-gritti-palace.jpg"
+                    src="https://media-cdn.tripadvisor.com/media/photo-s/1b/17/e1/48/esterno.jpg"
                     alt="Ristorante 7"
                   />
                 </Link>
@@ -347,7 +347,7 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://www.archibio.com/wp-content/uploads/2021/06/dove-mangiare-a-Venezia.jpg"
+                    src="https://res.cloudinary.com/tf-lab/image/upload/restaurant/11a1d1bb-c871-4b5a-83ec-b4e7e4ee9ad9/5eee1e0d-c481-4e94-8a18-6ffb492acf9d.jpg"
                     alt="Ristorante 8"
                   />
                 </Link>
@@ -356,11 +356,11 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://venetosecrets.com/wp-content/uploads/2017/01/28122016-L1160665.jpg"
+                    src="https://www.larivieradivenezia.com/inc/gallery/hotel/13.jpg"
                     alt="Ristorante 9"
                   />
                   <Carousel.Caption>
-                    <h3>Ristorantino San Marco</h3>
+                    <h3>Riviera</h3>
                     <p>Venezia</p>
                   </Carousel.Caption>
                 </Link>
@@ -371,7 +371,7 @@ function InitialFormPage() {
       </Container>
       <div className="mt-5">
         <AdvertisementPage />
-        <MyFooter />
+        <MyFooter/>
       </div>
     </div>
   );

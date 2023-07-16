@@ -133,7 +133,7 @@ const RestaurantPage = () => {
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <img src="https://www.cimasristorazione.com/wp-content/uploads/2019/01/cimas-piatti-italiani.jpg" alt="italia" style={{ maxWidth: '100%' }} />
             </div>
-          </Col>;
+          </Col>
         </Row>
         {/* ... */}
       </Container>

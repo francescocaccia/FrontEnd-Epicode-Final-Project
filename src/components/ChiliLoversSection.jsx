@@ -10,7 +10,7 @@ const restaurants = [
             'https://media-cdn.tripadvisor.com/media/photo-s/0e/a2/1a/96/20170310-201130-largejpg.jpg',
     },
     {
-        name: 'Rosso Picacnte',
+        name: 'Rosso Piccante',
         location: 'Torino',
         imageUrl:
             'https://lh5.googleusercontent.com/p/AF1QipP1-W6Wvw4iVgQOjoeKlNpwBNHoaC0Kj8Lec1Xj',
@@ -76,7 +76,7 @@ function ChiliLoversSection() {
                     />
                 </Col>
             </Row>
-            <p className="my-4 text-center">
+            <p className="my-4 text-center fw-semibold">
                 Benvenuti nella sezione dedicata agli amanti del peperoncino! Qui troverai informazioni sui ristoranti che offrono piatti piccanti, suggerimenti su come ordinare cibo piccante e curiosità sui diversi tipi di peperoncino e come vengono utilizzati nella cucina.
             </p>
             <p className="text-center">

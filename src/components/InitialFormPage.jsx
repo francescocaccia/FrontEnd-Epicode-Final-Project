@@ -286,7 +286,7 @@ function InitialFormPage() {
                 <Link to="reservationRestaurant">
                   <img
                     className="d-block w-100 carousel-image"
-                    src="https://media-assets.lacucinaitaliana.it/photos/6356739b6046cfb35635cf08/16:9/w_1280,c_limit/Bobo%20Cerea%20che%20manteca%20i%20paccheri.jpg"
+                    src="https://www.altissimoceto.it/Image/DaVittorio/risotto.JPG"
                     alt="Ristorante 3"
                   />
                   <Carousel.Caption>

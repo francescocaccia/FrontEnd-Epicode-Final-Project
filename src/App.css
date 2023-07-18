@@ -145,7 +145,7 @@
 
 
 
-/* +++++++card+++++++ AdversamentPage */
+/* +++++++card+++++++ AdversamentPage e per tutte le card */
 
 .card {
   transition: transform 0.3s;
@@ -211,4 +211,11 @@
 .card-img {
   height: 130px;
   object-fit: cover;
+}
+
+/* icone lavora con noi /recensione/clienti e aderire */
+
+.icon-hover:hover {
+  transition: transform 0.3s;
+  transform: scale(1.5);
 }

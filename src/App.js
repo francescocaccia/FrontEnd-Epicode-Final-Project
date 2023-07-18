@@ -20,7 +20,7 @@ function App() {
       <MyNavBar />
       <Routes>
         <Route path="/" element={<InitialFormPage />} />
-        <Route path="/restaurant" element={<RestaurantPage />} />
+        <Route path="/restaurant/:restaurantId" element={<RestaurantPage />} />
         <Route path="/registrationPage" element={<RegistrationPage />} />
         <Route path="/addRestaurant" element={<AddRestaurant />} />
         <Route path="/reservationRestaurant/:restaurantId" element={<ReservationRestaurant />} />

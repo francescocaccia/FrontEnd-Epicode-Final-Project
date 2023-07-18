@@ -49,7 +49,7 @@ function InitialFormPage() {
           const data = await resp.json();
           if (data.length !== 0) {
             dispatch(fetchDataSuccess(data));
-            navigate("/restaurant");
+            navigate(`/restaurant/${data[0].idRistorante}`);
           } else {
             alert("non sono stati trovati ristoranti con questi parametri")
           }
@@ -371,7 +371,7 @@ function InitialFormPage() {
       </Container>
       <div className="mt-5">
         <AdvertisementPage />
-        <MyFooter/>
+        <MyFooter />
       </div>
     </div>
   );

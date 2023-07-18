@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Carousel, Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Card, Carousel, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import GlassFork from "../GlassFork.png";
 import ChiliLoversSection from "./ChiliLoversSection";
@@ -342,47 +342,54 @@ function AdvertisementPage() {
               </Carousel.Item>
             </Carousel>
           </div>
+          <div><p className="text-center fw-semibold">“Non perdere l’occasione di scoprire i migliori ristoranti d’Italia con App&tito: prenota subito il tuo tavolo e vivi un’esperienza culinaria indimenticabile!”</p></div>
           {/* Per gli amanti del peperoncino peperoncinooooooooooooooooooooooooooooooooooooooooooooooooooooo!!!!!!!!!!!!!!!*/}
           <div>
             <ChiliLoversSection />
           </div>
           {/* card section per ristroratori */}
           <h4 className="d-flex justify-content-center mt-5 mb-4">A proposito di App&tito </h4>
-          <p >App&tito è la principale piattaforma di prenotazione e scoperta di ristoranti online in Italia. Scopri migliaia tra i migliori ristoranti a Roma, Milano, Napoli, Firenze e molte altre città grazie alla nostra selezione imbattibile di ristoranti per ogni esigenza. Cerca la disponibilità dei ristoranti in qualsiasi momento e al miglior prezzo. Con recensioni verificate per guidarti, puoi scoprire il ristorante perfetto su App&tito.
+          <p className="text-center">App&tito è la principale piattaforma di prenotazione e scoperta di ristoranti online in Italia. Scopri migliaia tra i migliori ristoranti a Roma, Milano, Napoli, Firenze e molte altre città grazie alla nostra selezione imbattibile di ristoranti per ogni esigenza. Cerca la disponibilità dei ristoranti in qualsiasi momento e al miglior prezzo. Con recensioni verificate per guidarti, puoi scoprire il ristorante perfetto su App&tito.
             Ogni giorno e per ogni occasione, puoi usufruire di sconti e promozioni speciali sui tuoi piatti preferiti.
             Hai voglia di mangiare pizza a Napoli, sushi a Milano o vuoi scoprire un ristorante stellato a Roma? Sei un amante dei piccoli locali particolari a Firenze, desideroso di un brunch domenicale a Torino o in cerca di un’atmosfera romantica a Venezia? Segui la guida e trova i migliori ristoranti su App&tito!</p>
           <Container>
-            {/* Aggiungi altre sezioni qui */}
+            {/* altre sezioni / icone  */}
             <Row className="my-4 text-center">
               <Col>
-                <img src={vantaggiLavorare} roundedCircle
-                  alt="vantaggiLavorare"
-                  width={100}
-                  height={100}/>
+                <Link to="/">
+                  <div className="icon-hover">
+                    <img src={vantaggiLavorare} className="rounded-circle" alt="vantaggiLavorare" width={100} height={100} />
+                  </div>
+                </Link>
                 <p>Scopri i vantaggi di lavorare con noi</p>
               </Col>
               <Col>
-                <img src={recensione} roundedCircle 
-                  alt="recensione"
-                  width={100}
-                  height={100}/>
+                <Link to="/">
+                  <div className="icon-hover">
+                    <img src={recensione} className="rounded-circle" alt="recensione" width={100} height={100} />
+                  </div>
+                </Link>
                 <p>Lasciaci una recensione</p>
               </Col>
               <Col>
-                <img src={lavoratoriAderiscono} roundedCircle 
-                  alt="lavoratoriAderiscono"
-                  width={100}
-                  height={100}/>
+                <Link to="/">
+                  <div className="icon-hover">
+                    <img src={lavoratoriAderiscono} className="rounded-circle" alt="lavoratoriAderiscono" width={100} height={100} />
+                  </div>
+                </Link>
                 <p>Come trattiamo i ristoratori che aderiscono</p>
               </Col>
               <Col>
-                <img src={aderire}roundedCircle 
-                    alt="aderire"
-                    width={100}
-                    height={100}/>
+                <Link to="/">
+                  <div className="icon-hover">
+                    <img src={aderire} className="rounded-circle" alt="aderire" width={100} height={100} />
+                  </div>
+                </Link>
                 <p>Info per aderire</p>
               </Col>
             </Row>
+
+
           </Container>
           <Card className="mt-5">
             <Card.Body>

@@ -173,16 +173,20 @@ const ProfilePage = () => {
                                 </Button>
                             </Card.Body>
                         </Card>
-                        <h4 className="mt-3">I miei ristoranti</h4>
-                        {utenteLoggato && utenteLoggato.ristorante && utenteLoggato.ristorante.map((ristorante) => (
-                            <Card key={ristorante.id} className="mt-3">
-                                <Card.Body>
-                                    <Card.Title>{ristorante.nomeRistorante}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">ID Ristorante: {ristorante.id}</Card.Subtitle>
-                                    <Button variant="primary" onClick={() => removeRestaurant(ristorante.id)}>Elimina ristorante</Button>
-                                </Card.Body>
-                            </Card>
-                        ))}
+                        {utenteLoggato && utenteLoggato.role === 'ADMIN' && (
+                            <>
+                                <h4 className="mt-3">I miei ristoranti</h4>
+                                {utenteLoggato.ristorante.map((ristorante) => (
+                                    <Card key={ristorante.id} className="mt-3">
+                                        <Card.Body>
+                                            <Card.Title>{ristorante.nomeRistorante}</Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">ID Ristorante: {ristorante.id}</Card.Subtitle>
+                                            <Button variant="danger" onClick={() => removeRestaurant(ristorante.id)}>Elimina ristorante</Button>
+                                        </Card.Body>
+                                    </Card>
+                                ))}
+                            </>
+                        )}
                         <h4 className="mt-3">Prenotazioni</h4>
                         {utenteLoggato.prenotazioni.length === 0 ? (
                             <p>Non hai prenotazioni</p>
@@ -190,29 +194,37 @@ const ProfilePage = () => {
                             <Card className="mt-3">
                                 <Card.Body>
                                     <Card.Title>Le mie prenotazioni</Card.Title>
-                                    {utenteLoggato.prenotazioni.map((prenotazione) => (
-                                        <ListGroup key={prenotazione.idPrenotazione} className="mt-3">
-                                            <ListGroupItem>Prenotazione al ristorante: {prenotazione.nomeRistorante}</ListGroupItem>
-                                            <ListGroupItem>Data prenotazione: {prenotazione.dataPrenotazione}</ListGroupItem>
-                                            <ListGroupItem>Numero persone: {prenotazione.numeroPersone}</ListGroupItem>
-                                            <ListGroupItem>
-                                                <Button className="mb-2 mb-sm-0 me-sm-2" variant="primary" onClick={() => handleEditClick(prenotazione)}>
-                                                    Modifica prenotazione
-                                                </Button>
-                                                <Button variant="danger" onClick={() => dispatch(deleteReservation(utenteLoggato.id, prenotazione.idPrenotazione))}>
-                                                    Elimina prenotazione
-                                                </Button>
-                                            </ListGroupItem>
-                                        </ListGroup>
-                                    ))}
+                                    {utenteLoggato.prenotazioni.map((prenotazione) => {
+                                        const dataPrenotazione = new Date(prenotazione.dataPrenotazione);
+                                        const opzioniData = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                                        const opzioniOra = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                                        const dataFormattata = dataPrenotazione.toLocaleDateString('it-IT', opzioniData);
+                                        const oraFormattata = dataPrenotazione.toLocaleTimeString('it-IT', opzioniOra);
+
+                                        return (
+                                            <ListGroup key={prenotazione.idPrenotazione} className="mt-3">
+                                                <ListGroupItem>Prenotazione al ristorante: {prenotazione.nomeRistorante}</ListGroupItem>
+                                                <ListGroupItem>Data prenotazione: {dataFormattata} {oraFormattata}</ListGroupItem>
+                                                <ListGroupItem>Numero persone: {prenotazione.numeroPersone}</ListGroupItem>
+                                                <ListGroupItem>
+                                                    <Button className="mb-2 mb-sm-0 me-sm-2" variant="primary" onClick={() => handleEditClick(prenotazione)}>
+                                                        Modifica prenotazione
+                                                    </Button>
+                                                    <Button variant="danger" onClick={() => dispatch(deleteReservation(utenteLoggato.id, prenotazione.idPrenotazione))}>
+                                                        Elimina prenotazione
+                                                    </Button>
+                                                </ListGroupItem>
+                                            </ListGroup>
+                                        );
+                                    })}
                                 </Card.Body>
                             </Card>
+
                         )}
                         {/* ... */}
                     </Col>
                 </Row>
             </Container>
-
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modifica prenotazione</Modal.Title>
@@ -222,7 +234,15 @@ const ProfilePage = () => {
                         <>
                             <ListGroup className="mt-3">
                                 <ListGroupItem>Prenotazione al ristorante: {currentReservation.nomeRistorante}</ListGroupItem>
-                                <ListGroupItem>Data prenotazione: {currentReservation.dataPrenotazione}</ListGroupItem>
+                                <ListGroupItem>
+                                    Data prenotazione: {
+                                        new Date(currentReservation.dataPrenotazione)
+                                            .toLocaleDateString('it-IT', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                                    } Alle ore : {
+                                        new Date(currentReservation.dataPrenotazione)
+                                            .toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+                                    }
+                                </ListGroupItem>
                                 <ListGroupItem>Numero persone: {currentReservation.numeroPersone}</ListGroupItem>
                             </ListGroup>
                             <Form.Group controlId="formNumPeople" className="mt-3">
@@ -241,6 +261,7 @@ const ProfilePage = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </>
 
     );

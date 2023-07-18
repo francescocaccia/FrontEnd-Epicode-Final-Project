@@ -1,3 +1,11 @@
+
+  /* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');        esempio */
+
+
+
+
+
+
 /*------------+++++++ NAV BAR  */
 
 .navbar-with-shadow {
@@ -187,8 +195,9 @@
 /* rating stelline recensione */
 
 .star-active {
-  color:  yellow;
+  color: yellow;
 }
+
 .star-inactive {
   color: #a9a9a9;
 }
@@ -218,4 +227,19 @@
 .icon-hover:hover {
   transition: transform 0.3s;
   transform: scale(1.5);
+}
+
+
+
+
+/* Italia in RestaurantPage */
+
+
+
+
+/* bottone in navBar form (lente di ingrandimento per ricerca) */
+.my-button:disabled {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  opacity: 1;
 }

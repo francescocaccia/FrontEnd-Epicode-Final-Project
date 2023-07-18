@@ -6,8 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDataSuccess } from "../redux/actions";
-import { getUserLoggedAction } from "../redux/actions";
+import logo from "../logo.png";
 import sfondo from "../sfondo.png";
+
+
+
 function InitialFormPage() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
@@ -23,9 +26,7 @@ function InitialFormPage() {
 
 
   const handleSearch = () => {
-
     dispatch(getRistorantibyStringAndCity(searchValue, city));
-
   };
 
 
@@ -83,58 +84,60 @@ function InitialFormPage() {
 
   return (
     <div>
-      <div
-        style={{
-          backgroundImage: `url(${sfondo})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-        }}
-      />
-      <Container className="d-flex align-items-center justify-content-start" style={{ minHeight: "100vh" }}>
-        <Row>
-          <Col xs={12} md={8} lg={12}>
-            <h2 className="text-light">Scopri e prenota i migliori ristoranti</h2>
-            <FloatingLabel controlId="floatingInput" className="mb-3 home-search-form">
-              <InputGroup>
-                <Form.Control
-                  type="text"
-                  as="select"
-                  placeholder="Inserisci la città"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                >
-                  <option value="" >Seleziona una città</option>
-                  {citiesData.map((cityData, index) => (
-                    <option key={index} value={cityData}>
-                      {cityData}
-                    </option>
-                  ))}
-                </Form.Control>
-              </InputGroup>
-            </FloatingLabel>
-            <FloatingLabel controlId="floatingInput" className="mt-3 home-search-form">
-              <InputGroup>
-                <Form.Control
-                  type="text"
-                  placeholder="Nome ristorante o tipo"
-                  value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value)}
-                />
-                <Button variant="info" disabled={!city && !searchValue} onClick={handleSearch}>
-                  Cerca
-                </Button>
-              </InputGroup>
-            </FloatingLabel>
-          </Col>
-        </Row>
-      </Container>
-
+      <div className="mt-4" style={{ position: "relative", width: "80%", maxWidth: "1600px", height: "500px", margin: "auto" }}>
+        <div
+          style={{
+            backgroundImage: `url(${sfondo})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            borderRadius: "25px",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+          }}
+        />
+        <Container className="d-flex align-items-center justify-content-start" style={{ minHeight: "100%", width: "80%" }}>
+          <Row>
+            <Col xs={12} md={8} lg={12}>
+              <h2 className="text-light">Scopri e prenota i migliori ristoranti</h2>
+              <FloatingLabel controlId="floatingInput" className="mb-3 home-search-form">
+                <InputGroup>
+                  <Form.Control
+                    type="text"
+                    as="select"
+                    placeholder="Inserisci la città"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  >
+                    <option value="">Seleziona una città</option>
+                    {citiesData.map((cityData, index) => (
+                      <option key={index} value={cityData}>
+                        {cityData}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </InputGroup>
+              </FloatingLabel>
+              <FloatingLabel controlId="floatingInput" className="mt-3 home-search-form">
+                <InputGroup>
+                  <Form.Control
+                    type="text"
+                    placeholder="Nome ristorante o tipo"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                  />
+                  <Button variant="info" disabled={!city && !searchValue} onClick={handleSearch}>
+                    Cerca
+                  </Button>
+                </InputGroup>
+              </FloatingLabel>
+            </Col>
+          </Row>
+        </Container>
+      </div>
       <div
         style={{
           position: "absolute",
@@ -146,7 +149,20 @@ function InitialFormPage() {
           zIndex: -1,
         }}
       ></div>
-      <Container className="mt-5 mb-5">
+
+      {/* fine form di ricerca e imamgine */}
+
+
+
+      <Container>
+        <div className="text-center">
+          <img
+            src={logo}
+            alt="logo"
+            width={185}
+            height={185}
+          />
+        </div>
         <h2 className="text-dark">La Top 3 del mese</h2>
         <Carousel className="mt-3" interval={null} indicators={false}>
           <Carousel.Item>

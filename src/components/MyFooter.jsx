@@ -10,7 +10,6 @@ class MyFooter extends Component {
             <h6 className=" text-light fs-4">
               Prenota i migliori ristoranti per ogni occasione
             </h6>
-
           </div>
           <div className="container mt-5 ">
             <footer>

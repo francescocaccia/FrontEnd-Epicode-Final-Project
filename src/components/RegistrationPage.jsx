@@ -5,6 +5,7 @@ import { BsFacebook, BsTwitter, BsInstagram, BsGoogle } from "react-icons/bs";
 import { GiItalia, GiMeal } from "react-icons/gi";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import logo from "../logo.png";
 
 function RegistrationPage() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function RegistrationPage() {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const handleClick = () => {
-  
+
     const userData = {
       nome: nome,
       cognome: cognome,
@@ -62,7 +63,12 @@ function RegistrationPage() {
             <div className="card bg-dark text-white my-5 mx-auto" style={{ borderRadius: "1rem", maxWidth: "400px" }}>
               <div className="card-body p-5 d-flex flex-column align-items-center mx-auto w-100">
                 <h2 className="fw-bold mb-2 text-uppercase">SIGN UP</h2>
-                <GiMeal className="fs-1" />
+                <img
+                  src={logo}
+                  alt="logo"
+                  width={85}
+                  height={85}
+                />
                 <p>Iscriviti subito per tenere traccia del Gusto!</p>
                 {error && <Alert variant="danger">{error}</Alert>}
                 {success && <Alert variant="success">{success}</Alert>}

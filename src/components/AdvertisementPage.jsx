@@ -228,7 +228,7 @@ function AdvertisementPage() {
                 />
                 <Card.Body>
                   <Card.Title>La Taverna Dei Mercanti</Card.Title>
-                  <Card.Text>Torino (TO)</Card.Text>
+                  <Card.Text>Torino</Card.Text>
                 </Card.Body>
               </Card>
             </Link>
@@ -388,16 +388,14 @@ function AdvertisementPage() {
                 <p>Info per aderire</p>
               </Col>
             </Row>
-
-
           </Container>
           <Card className="mt-5">
             <Card.Body>
-              <div className="d-flex">
-                <div className="flex-shrink-0">
+              <Row>
+                <Col xs={12} md={4}>
                   <Card.Img variant="top" src="https://viviallestero.com/wp-content/uploads/2021/05/Ristorante-italiano-assume-cuochi-a-Valencia.jpg" />
-                </div>
-                <div className="flex-grow-1 ms-3">
+                </Col>
+                <Col xs={12} md={8}>
                   <Card.Title>Registra il tuo ristorante</Card.Title>
                   <Card.Text>
                     Sei il proprietario di un ristorante e vuoi aumentare la visibilità e le prenotazioni? Registrati su App&tito e raggiungi una vasta comunità di amanti del cibo alla ricerca dei migliori ristoranti in Italia. Con la nostra piattaforma di prenotazione online, puoi gestire facilmente le prenotazioni e attirare nuovi clienti. Unisciti a noi oggi e fai crescere il tuo business!
@@ -405,8 +403,8 @@ function AdvertisementPage() {
                   <Button variant="outline-info" className="sharp-corners">
                     Aggiungi un ristorante
                   </Button>
-                </div>
-              </div>
+                </Col>
+              </Row>
             </Card.Body>
           </Card>
         </div>

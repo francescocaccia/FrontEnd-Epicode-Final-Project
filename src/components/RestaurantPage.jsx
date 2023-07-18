@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card, Carousel, Button, Modal, Form, Col, Row } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { MdEditCalendar } from "react-icons/md";
 import { BiPen } from "react-icons/bi";
@@ -21,17 +21,15 @@ const RestaurantPage = () => {
   useEffect(() => { setToken(localStorage.getItem("token")) },
     [])
 
-    useEffect(() => {
-      console.log('ristoranti:', ristoranti);
-      console.log('restaurantId:', restaurantId);
-      const selectedRestaurant = ristoranti.find(
-        (ristorante) => ristorante.idRistorante === parseInt(restaurantId)
-      );
-      setCurrentRestaurant(selectedRestaurant);
-    }, [ristoranti, restaurantId]);
-    
+  useEffect(() => {
+    const selectedRestaurant = ristoranti.find(
+      (ristorante) => ristorante.idRistorante === parseInt(restaurantId)
+    );
+    setCurrentRestaurant(selectedRestaurant);
+  }, [ristoranti, restaurantId]);
 
-    
+
+
   //funzione recensione star
   const stars = Array(5).fill(0);
   const [currentValue, setCurrentValue] = React.useState(0);
@@ -49,7 +47,7 @@ const RestaurantPage = () => {
     setHoverValue(undefined)
   }
 
-    
+
   // funzione per gestire il click sul pulsante "Lascia una recensione"
   const handleReviewClick = (ristorante) => {
     setCurrentRestaurant(ristorante);
@@ -68,15 +66,19 @@ const RestaurantPage = () => {
   // Aggiungi una funzione per gestire il submit del form
   const handleSubmit = async (event) => {
     event.preventDefault();
-   // console.log('currentRestaurant:', currentRestaurant);
+
+    // Verifica che l'utente abbia inserito il testo della recensione e la valutazione a stelle
+    if (!reviewText || currentValue === 0) {
+      alert('Per favore, inserisci sia il testo della recensione che la valutazione a stelle.');
+      return;
+    }
+
     const payload = {
       numeroStelle: currentValue,
       contenutoRecensione: reviewText,
       idCliente: utenteLoggato.id,
-      idRistorante: parseInt(restaurantId)
+      idRistorante: parseInt(currentRestaurant.idRistorante)
     };
-    console.log(payload)
-
     const response = await fetch("http://localhost:8080/recensioni/create", {
       method: 'POST',
       headers: {
@@ -88,12 +90,37 @@ const RestaurantPage = () => {
 
     if (response.ok) {
       alert("recensione creata");
-  } else {
+      setShowModal(false);
+    } else {
       response.text().then(r => {
-          alert(r);
+        alert(r);
       })
-  }
+    }
   };
+
+  // get per le recensioni
+
+  useEffect(() => {
+    const RecensioniRistorante = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/recensioni/search/${restaurantId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          RecensioniRistorante(data);
+        } else {
+          alert('Si è verificato un errore durante il recupero delle recensioni utente');
+        }
+      } catch (error) {
+        alert('Si è verificato un errore durante il recupero delle recensioni utente:', error);
+      }
+    };
+    RecensioniRistorante();
+  }, []);
+
 
 
   return (
@@ -135,7 +162,7 @@ const RestaurantPage = () => {
                               prenota ristorante
                             </small>
                             {utenteLoggato && (
-                              <small onClick={() => handleReviewClick(ristorante)} className=" fw-semibold">
+                              <small onClick={() => { setCurrentRestaurant(ristorante); handleReviewClick(ristorante) }} className=" fw-semibold">
                                 <BiPen className="fs-5" />
                                 scrivi una recensione
                               </small>
@@ -150,7 +177,7 @@ const RestaurantPage = () => {
           </Col>
           {/* colonna per la mappa */}
           <Col xs={12} md={8}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className="fixed-image" style={{ display: 'flex', justifyContent: 'center', position: 'fixed', top: '20%' }}>
               <img src="https://www.cimasristorazione.com/wp-content/uploads/2019/01/cimas-piatti-italiani.jpg" alt="italia" style={{ maxWidth: '100%' }} />
             </div>
           </Col>
@@ -163,7 +190,7 @@ const RestaurantPage = () => {
         </Modal.Header>
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
-            {/* Aggiungi qui il contenuto del modale per lasciare una recensione */}
+            {/*  contenuto del modale per lasciare una recensione */}
             {currentRestaurant && (
               <>
                 <p>Stai lasciando una recensione per il ristorante: {currentRestaurant.nomeRistorante}</p>

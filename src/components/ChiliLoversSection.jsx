@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Image, Card } from 'react-bootstrap';
 import spiedopeppers from "../spiedopeppers.png";
-// Esempio di dati dei ristoranti
+// dati dei ristoranti
 const restaurants = [
     {
         name: 'Al Vecchio Rio',
@@ -28,8 +28,8 @@ const restaurants = [
             'https://media-cdn.tripadvisor.com/media/photo-s/11/16/4b/d2/piatti-e-spiedini.jpg',
     },
     {
-        name: 'Ristorante 1',
-        location: 'Descrizione del ristorante 1',
+        name: 'Pang',
+        location: 'Jesi (AN)',
         imageUrl:
             'https://media-cdn.tripadvisor.com/media/photo-s/1c/6f/7c/fb/i-nostri-piatti.jpg',
     },
@@ -40,14 +40,14 @@ const restaurants = [
             'https://assets.eatintime.it/eatintime/img/media/2196-passaggio-in-india-ristorante-indiano-torino-md.jpg',
     },
     {
-        name: 'Ristorante 1',
-        location: 'Descrizione del ristorante 1',
+        name: 'Peperoncino Nostro',
+        location: 'Catanzaro Lido (CZ)',
         imageUrl:
             'https://www.ilgiornaledelcibo.it/wp-content/uploads/2016/09/pasta-piccante.jpg',
     },
     {
-        name: 'Ristorante 2',
-        location: 'Descrizione del ristorante 2',
+        name: 'Pipàzzu',
+        location: 'Squillace (CZ)',
         imageUrl:
             'https://www.finedininglovers.it/sites/g/files/xknfdk1106/files/styles/im_landscape_100/public/fdl_content_import_it/cibi-piccanti-rimedi.jpg.webp?itok=-rg77S8M',
     },

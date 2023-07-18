@@ -15,6 +15,7 @@ const ProfilePage = () => {
     const [showModal, setShowModal] = useState(false);
     const [currentReservation, setCurrentReservation] = useState(null);
     const [newNumPeople, setNewNumPeople] = useState(null);
+    const [recensioniUtente, setRecensioniUtente] = useState([]);
     const { restaurantId } = useParams();
     //Mostra Modale e modifica prenotazione
     const handleEditClick = (prenotazione) => {
@@ -133,6 +134,26 @@ const ProfilePage = () => {
         };
     };
 
+    // get recensioni
+    // useEffect(() => {
+    //     const RecensioniUtente = async () => {
+    //         try {
+    //             const response = await fetch(`http://localhost:8080/recensioni/search/${ristoranteId}`);
+    //             if (response.ok) {
+    //                 const data = await response.json();
+    //                 setRecensioniUtente(data);
+    //             } else {
+    //                 alert('Si è verificato un errore durante il recupero delle recensioni utente');
+    //             }
+    //         } catch (error) {
+    //             alert('Si è verificato un errore durante il recupero delle recensioni utente:', error);
+    //         }
+    //     };
+
+    //     RecensioniUtente();
+    // }, []);
+
+
     return (
         <>
             <Container className="profile-container mb-5">
@@ -200,7 +221,6 @@ const ProfilePage = () => {
                                         const opzioniOra = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
                                         const dataFormattata = dataPrenotazione.toLocaleDateString('it-IT', opzioniData);
                                         const oraFormattata = dataPrenotazione.toLocaleTimeString('it-IT', opzioniOra);
-
                                         return (
                                             <ListGroup key={prenotazione.idPrenotazione} className="mt-3">
                                                 <ListGroupItem>Prenotazione al ristorante: {prenotazione.nomeRistorante}</ListGroupItem>
@@ -219,7 +239,6 @@ const ProfilePage = () => {
                                     })}
                                 </Card.Body>
                             </Card>
-
                         )}
                         {/* ... */}
                     </Col>

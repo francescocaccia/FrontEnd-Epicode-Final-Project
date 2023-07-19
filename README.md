@@ -1,7 +1,8 @@
 
 # App&tito - Trova i migliori ristoranti in Italia
 
-![App&tito]()
+![App&tito](https://github.com/francescocaccia/FrontEnd-Epicode-Final-Project/assets/123968277/da940f08-31e5-4d87-889b-47c4d6929016)
+
 
 Benvenuti su App&tito, l'app definitiva per trovare i migliori ristoranti in Italia! 🍝🍕
 

@@ -243,7 +243,7 @@ function AdvertisementPage() {
                 />
                 <Card.Body>
                   <Card.Title>Osteria San Maurizio</Card.Title>
-                  <Card.Text>Ivrea </Card.Text>
+                  <Card.Text>Ivrea (TO)</Card.Text>
                 </Card.Body>
               </Card>
             </Link>

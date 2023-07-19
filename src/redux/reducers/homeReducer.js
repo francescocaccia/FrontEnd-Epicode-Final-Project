@@ -6,7 +6,7 @@ import { GET_USER_LOGGED } from "../actions";
 import {FETCH_DATA_SUCCESS} from "../actions";
 import { SET_PROFILE } from "../actions";
 import {DELETE_RISTORANTE} from "../actions";
-
+import {DELETE_RECENSIONE} from "../actions";
 const initialState = {
 
   ristoranti: [],
@@ -14,7 +14,8 @@ const initialState = {
   cardImmagini: [],
   clienteLoggato: null,
   profile: null,
-  reservation: []
+  reservation: [],
+  recensioni:[]
 };
 
 
@@ -58,6 +59,13 @@ const homeReducer = (state = initialState, action) => {
             ...state,
             profile: action.payload
           };
+          case DELETE_RECENSIONE:
+            return {
+              ...state,
+              recensioni: state.recensioni.filter(
+                recensione => recensione.idCliente !== action.payload.idCliente || recensione.idRecensione !== action.payload.idRecensione
+              )
+            };
 
           case DELETE_RISTORANTE:
             const ristoranteId = action.payload;

@@ -17,6 +17,8 @@ const RestaurantPage = () => {
   const [currentRestaurant, setCurrentRestaurant] = useState(null);
   const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
   const { restaurantId } = useParams();
+
+
   const navigate = useNavigate();
   useEffect(() => { setToken(localStorage.getItem("token")) },
     [])
@@ -63,7 +65,7 @@ const RestaurantPage = () => {
     }
   }
 
-  // Aggiungi una funzione per gestire il submit del form
+  //  funzione per gestire il submit del form
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -87,7 +89,6 @@ const RestaurantPage = () => {
       },
       body: JSON.stringify(payload),
     });
-
     if (response.ok) {
       alert("recensione creata");
       setShowModal(false);
@@ -97,30 +98,7 @@ const RestaurantPage = () => {
       })
     }
   };
-
-  // get per le recensioni
-
-  useEffect(() => {
-    const RecensioniRistorante = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/recensioni/search/${restaurantId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        });
-        if (response.ok) {
-          const data = await response.json();
-          RecensioniRistorante(data);
-        } else {
-          alert('Si è verificato un errore durante il recupero delle recensioni utente');
-        }
-      } catch (error) {
-        alert('Si è verificato un errore durante il recupero delle recensioni utente:', error);
-      }
-    };
-    RecensioniRistorante();
-  }, []);
-
+  console.log(ristoranti);
 
 
   return (
@@ -135,18 +113,36 @@ const RestaurantPage = () => {
                   <Card.Body>
                     <Row className="align-items-center">
                       <Col xs={12}>
-                        <Carousel className="custom-carousel mb-3">
+                        <Carousel className="custom-carousel mb-3" style={{ width: "100%" }}>
                           <Carousel.Item>
-                            <img className="carousel-image img-fluid" src={ristorante.cardImmagini.immagine1} alt={ristorante.nomeRistorante} />
+                            <img
+                              className="carousel-image img-fluid"
+                              src={ristorante.cardImmagini.immagine1}
+                              alt={ristorante.nomeRistorante}
+                              style={{ maxWidth: "100%" }}
+                            />
                           </Carousel.Item>
                           <Carousel.Item>
-                            <img className="carousel-image img-fluid" src={ristorante.cardImmagini.immagine2} alt={ristorante.nomeRistorante} />
+                            <img
+                              className="carousel-image img-fluid"
+                              src={ristorante.cardImmagini.immagine2}
+                              alt={ristorante.nomeRistorante}
+                              style={{ maxWidth: "100%" }}
+                            />
                           </Carousel.Item>
                           <Carousel.Item>
-                            <img className="carousel-image img-fluid" src={ristorante.cardImmagini.immagine3} alt={ristorante.nomeRistorante} />
+                            <img
+                              className="carousel-image img-fluid"
+                              src={ristorante.cardImmagini.immagine3}
+                              alt={ristorante.nomeRistorante}
+                              style={{ maxWidth: "100%" }}
+                            />
                           </Carousel.Item>
                         </Carousel>
-                        <blockquote className="blockquote" style={{ fontSize: '0.9rem' }}>
+                        <blockquote
+                          className="blockquote"
+                          style={{ fontSize: "0.9rem" }}
+                        >
                           <span>Nome ristorante: {ristorante.nomeRistorante}</span>
                           <br />
                           <span>Tipo cucina: {ristorante.tipoCucina}</span>
@@ -155,14 +151,56 @@ const RestaurantPage = () => {
                           <br />
                           <span>Città: {ristorante.luogo.citta}</span>
                           <br />
-                          <p>Recensioni: {ristorante.recensione}</p>
+                          {ristorante.recensione.length > 1 ? (
+                            <details>
+                              <summary>Recensioni</summary>
+                              {ristorante.recensione.map((recension) => (
+                                <div key={recension.idRecensione}>
+                                  <span>Recensione: {recension.contenutoRecensione}</span>
+                                  <br />
+                                  <span>Valutazione:</span>
+                                  {[...Array(recension.numeroStelle)].map((_, i) => (
+                                    <BiSolidStar
+                                      key={i}
+                                      style={{ color: recension.numeroStelle >= 4 ? 'FFD700' : 'gray' }}
+                                    />
+                                  ))}
+                                </div>
+                              ))}
+                            </details>
+                          ) : (
+                            ristorante.recensione.map((recension) => (
+                              <div key={recension.idRecensione}>
+                                <span>Recensione: {recension.contenutoRecensione}</span>
+                                <br />
+                                <span>Valutazione:</span>
+                                {[...Array(recension.numeroStelle)].map((_, i) => (
+                                  <BiSolidStar
+                                    key={i}
+                                    style={{ color: recension.numeroStelle >= 4 ? 'FFD700' : 'gray' }}
+                                  />
+                                ))}
+                              </div>
+                            ))
+                          )}
+
+
                           <div className="text-end">
-                            <small onClick={() => handleReservationClick(ristorante)} className="me-5 fw-semibold text-info">
+                            <small
+                              onClick={() => handleReservationClick(ristorante)}
+                              className="me-5 fw-semibold text-info"
+                            >
                               <MdEditCalendar className="fs-5" />
                               prenota ristorante
                             </small>
                             {utenteLoggato && (
-                              <small onClick={() => { setCurrentRestaurant(ristorante); handleReviewClick(ristorante) }} className=" fw-semibold">
+                              <small
+                                onClick={() => {
+                                  setCurrentRestaurant(ristorante);
+                                  handleReviewClick(ristorante);
+                                }}
+                                className=" fw-semibold"
+                              >
                                 <BiPen className="fs-5" />
                                 scrivi una recensione
                               </small>
@@ -177,13 +215,36 @@ const RestaurantPage = () => {
           </Col>
           {/* colonna per la mappa */}
           <Col xs={12} md={8}>
-            <div className="fixed-image" style={{ display: 'flex', justifyContent: 'center', position: 'fixed', top: '20%' }}>
-              <img src="https://www.cimasristorazione.com/wp-content/uploads/2019/01/cimas-piatti-italiani.jpg" alt="italia" style={{ maxWidth: '100%' }} />
+            {/* immagine fissa per schermi grandi */}
+            <div
+              className="d-none d-md-block fixed-image"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                position: "fixed",
+                top: "20%",
+              }}
+            >
+              <img
+                src="https://www.cimasristorazione.com/wp-content/uploads/2019/01/cimas-piatti-italiani.jpg"
+                alt="italia"
+                style={{ maxWidth: "100%" }}
+              />
+            </div>
+
+            {/* immagine non fissa per schermi medi e piccoli */}
+            <div className="d-md-none" style={{ textAlign: "center" }}>
+              <img
+                src="https://www.cimasristorazione.com/wp-content/uploads/2019/01/cimas-piatti-italiani.jpg"
+                alt="italia"
+                style={{ maxWidth: "100%" }}
+              />
             </div>
           </Col>
         </Row>
         {/* ... */}
       </Container>
+
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Lascia una recensione</Modal.Title>

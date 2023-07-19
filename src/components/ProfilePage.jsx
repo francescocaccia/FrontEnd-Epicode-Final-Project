@@ -3,26 +3,32 @@ import logo from "../logo.png";
 import { Container, Row, Col, Button, Card, ListGroup, ListGroupItem, Modal, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { DELETE_RESERVATION, deleteRistorante, getUserLoggedAction, setUtenteLoggato } from "../redux/actions";
+import { DELETE_RECENSIONE, DELETE_RESERVATION, deleteRistorante, getUserLoggedAction, setUtenteLoggato } from "../redux/actions";
+import { BiSolidStar } from 'react-icons/bi';
 
 
 const ProfilePage = () => {
 
     const utenteLoggato = useSelector((stato) => stato.home.clienteLoggato);
+    const ristoranti = useSelector(state => state.home.ristoranti);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [token, setToken] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [currentReservation, setCurrentReservation] = useState(null);
     const [newNumPeople, setNewNumPeople] = useState(null);
-    const [recensioniUtente, setRecensioniUtente] = useState([]);
-    const { restaurantId } = useParams();
+    const [reviews, setReviews] = useState([]);
+
+
+
+
     //Mostra Modale e modifica prenotazione
     const handleEditClick = (prenotazione) => {
         setCurrentReservation(prenotazione);
         setNewNumPeople(prenotazione.numeroPersone);
         setShowModal(true);
     }
+
 
     //Logout
     const handleLogout = () => {
@@ -134,24 +140,59 @@ const ProfilePage = () => {
         };
     };
 
-    // get recensioni
-    // useEffect(() => {
-    //     const RecensioniUtente = async () => {
-    //         try {
-    //             const response = await fetch(`http://localhost:8080/recensioni/search/${ristoranteId}`);
-    //             if (response.ok) {
-    //                 const data = await response.json();
-    //                 setRecensioniUtente(data);
-    //             } else {
-    //                 alert('Si è verificato un errore durante il recupero delle recensioni utente');
-    //             }
-    //         } catch (error) {
-    //             alert('Si è verificato un errore durante il recupero delle recensioni utente:', error);
-    //         }
-    //     };
+    // get recensioni per utente
+    useEffect(() => {
+        const fetchReviews = async (userId) => {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await fetch(`http://localhost:8080/recensioni/utente/${userId}`, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setReviews(data);
+                } else {
+                    // gestisci gli errori qui
+                }
+            } catch (error) {
+                // gestisci gli errori qui
+            }
+        };
 
-    //     RecensioniUtente();
-    // }, []);
+        if (utenteLoggato) {
+            fetchReviews(utenteLoggato.id);
+        }
+    }, [utenteLoggato]);
+
+    //DELETE RECENSIONE 
+    const deleteRecensione = (clienteId, idRecensione) => {
+        return (dispatch) => {
+            if (window.confirm("Sei sicuro di voler cancellare questa prenotazione?")) {
+                fetch(`http://localhost:8080/recensioni/delete/${clienteId}/${idRecensione}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                    },
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            dispatch({
+                                type: DELETE_RECENSIONE,
+                                payload: idRecensione,
+                            });
+                            alert("prenotazione eliminata con successo")
+                        } else {
+                            throw new Error("Errore durante l'eliminazione della prenotazione");
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+        };
+    };
 
 
     return (
@@ -159,7 +200,6 @@ const ProfilePage = () => {
             <Container className="profile-container mb-5">
                 <Row className="justify-content-center">
                     <Col xs={12} sm={6} md={4} className="text-center mb-5">
-
                         <img
                             src={logo}
                             alt="logo"
@@ -179,15 +219,15 @@ const ProfilePage = () => {
                         />
                     </Col>
                     <Col xs={12} sm={6} md={8}>
+                    <h4>Il mio profilo</h4>
                         <Card>
-                            <Card.Body>
-                                <h4>Il mio profilo</h4>
-                                <Card.Title>{utenteLoggato.nome} {utenteLoggato.cognome}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{utenteLoggato.email}</Card.Subtitle>
+                            <Card.Body>                          
+                                <Card.Title> {utenteLoggato.nome} {utenteLoggato.cognome}</Card.Title>
+                                <Card.Subtitle className="mb-2 fs-5 text-muted">{utenteLoggato.email}</Card.Subtitle>
                                 <Card.Text>
-                                    Numero di telefono: {utenteLoggato.numeroTelefono}<br />
-                                    ID Utente: {utenteLoggato.id}<br />
-                                    Ruolo: {utenteLoggato.role}
+                                    <span className='fw-semibold fs-5'> Numero di telefono: </span>{utenteLoggato.numeroTelefono}<br />
+                                    <span className='fs-5'> ID Utente: {utenteLoggato.id}</span><br />
+                                    <span className='fs-5'> Ruolo: {utenteLoggato.role}</span>
                                 </Card.Text>
                                 <Button variant="danger" onClick={handleLogout}>
                                     Logout
@@ -223,9 +263,9 @@ const ProfilePage = () => {
                                         const oraFormattata = dataPrenotazione.toLocaleTimeString('it-IT', opzioniOra);
                                         return (
                                             <ListGroup key={prenotazione.idPrenotazione} className="mt-3">
-                                                <ListGroupItem>Prenotazione al ristorante: {prenotazione.nomeRistorante}</ListGroupItem>
-                                                <ListGroupItem>Data prenotazione: {dataFormattata} {oraFormattata}</ListGroupItem>
-                                                <ListGroupItem>Numero persone: {prenotazione.numeroPersone}</ListGroupItem>
+                                                <ListGroupItem><span className='fs-5'>Prenotazione al ristorante: {prenotazione.nomeRistorante}</span></ListGroupItem>
+                                                <ListGroupItem><span className='fs-5'>Data prenotazione: {dataFormattata} {oraFormattata}</span></ListGroupItem>
+                                                <ListGroupItem><span className='fs-5'> Numero persone: {prenotazione.numeroPersone}</span></ListGroupItem>
                                                 <ListGroupItem>
                                                     <Button className="mb-2 mb-sm-0 me-sm-2" variant="primary" onClick={() => handleEditClick(prenotazione)}>
                                                         Modifica prenotazione
@@ -240,7 +280,45 @@ const ProfilePage = () => {
                                 </Card.Body>
                             </Card>
                         )}
-                        {/* ... */}
+                        {reviews.length > 0 ? (
+                            <>
+                                <h4>Le tue recensioni:</h4>
+                                {reviews.map((review) => {
+                                    const ristorante = ristoranti.find(r => r.id === review.idRistorante);
+                                    return (
+                                        <Card key={review.idRecensione} className="mt-3">
+                                            <Card.Body>
+                                                <Card.Title>ID Recensione: {review.idRecensione}</Card.Title>
+                                                <Card.Subtitle className="mb-2 text-muted">
+                                                    Valutazione:
+                                                    {[...Array(review.numeroStelle)].map((_, i) => (
+                                                        <BiSolidStar
+                                                            key={i}
+                                                            style={{ color: review.numeroStelle >= 4 ? '#FFD700' : 'gray' }}
+                                                            className='fs-5'
+                                                        />
+                                                    ))}
+                                                </Card.Subtitle>
+                                                <Card.Text>
+                                                    <span className="fs-5">Recensione: {review.contenutoRecensione}</span>
+                                                </Card.Text>
+                                                {/* Visualizza il nome del ristorante */}
+                                                {ristorante && <Card.Text>Nome Ristorante: {ristorante.nomeRistorante}</Card.Text>}
+                                                <Button
+                                                    variant="danger"
+                                                    onClick={() => dispatch(deleteRecensione(utenteLoggato.id, review.idRecensione))}
+                                                >
+                                                    Elimina recensione
+                                                </Button>
+                                            </Card.Body>
+                                        </Card>
+                                    );
+                                })}
+                            </>
+                        ) : (
+                            <p className='fs-5 fw-semibold mt-4'>Non hai ancora scritto nessuna recensione.</p>
+                        )}
+
                     </Col>
                 </Row>
             </Container>

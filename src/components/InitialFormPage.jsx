@@ -14,7 +14,7 @@ import sfondo from "../sfondo.png";
 function InitialFormPage() {
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
-  const [citiesData, setCitiesData] = useState([]);
+  // const [citiesData, setCitiesData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate()
 
@@ -26,8 +26,10 @@ function InitialFormPage() {
 
 
   const handleSearch = () => {
-    dispatch(getRistorantibyStringAndCity(searchValue, city));
+    const searchFunction = getRistorantibyStringAndCity(searchValue, city);
+    searchFunction();
   };
+  
 
 
   const getRistorantibyStringAndCity = (stringa, city) => {
@@ -42,7 +44,6 @@ function InitialFormPage() {
     } else {
       url = url + `?citta=${city}`
     }
-
     return async () => {
       try {
         const resp = await fetch(url)
@@ -65,20 +66,20 @@ function InitialFormPage() {
 
 
 
-  //aggiorna lo stato del dropdown ogni volta++++++++++++++
-  useEffect(() => {
-    const fetchCitiesData = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/luogo/citta');
-        const data = await response.json();
-        setCitiesData(data);
-      } catch (error) {
-        alert('Si è verificato un errore:', error);
-      }
-    };
+  // //aggiorna lo stato del dropdown ogni volta++++++++++++++
+  // useEffect(() => {
+  //   const fetchCitiesData = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:8080/luogo/citta');
+  //       const data = await response.json();
+  //       setCitiesData(data);
+  //     } catch (error) {
+  //       alert('Si è verificato un errore:', error);
+  //     }
+  //   };
 
-    fetchCitiesData();
-  }, []);
+  //   fetchCitiesData();
+  // }, []);
 
 
 
@@ -107,17 +108,16 @@ function InitialFormPage() {
                 <InputGroup>
                   <Form.Control
                     type="text"
-                    as="select"
                     placeholder="Inserisci la città"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                   >
-                    <option value="">Seleziona una città</option>
+                    {/* <option value="">Seleziona una città</option>
                     {citiesData.map((cityData, index) => (
                       <option key={index} value={cityData}>
                         {cityData}
                       </option>
-                    ))}
+                    ))} */}
                   </Form.Control>
                 </InputGroup>
               </FloatingLabel>

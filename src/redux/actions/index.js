@@ -10,7 +10,7 @@ export const SET_PROFILE = "SET_PROFILE";
 export const DELETE_RISTORANTE = "DELETE_RISTORANTE";
 export const DELETE_RESERVATION = "DELETE_RESERVATION";
 export const GET_RISTORANTI_BY_STRING_AND_CITY = "GET_RISTORANTI_BY_STRING_AND_CITY";
-
+export const DELETE_RECENSIONE = "DELETE_RECENSIONE";
 
 export const setAdmin = isAdmin => {
   return {
@@ -86,6 +86,12 @@ export const deleteReservation = (idPrenotazione) => {
   };
 };
 
+export const deleteRecensione = (idCliente, idRecensione) => {
+  return {
+    type: DELETE_RECENSIONE,
+    payload: idCliente, idRecensione,
+  };
+};
 
 
 

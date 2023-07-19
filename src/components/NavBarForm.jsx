@@ -47,7 +47,6 @@ const navigate= useNavigate();
     } else {
       url = url + `?citta=${city}`
     }
-
     return async () => {
       try {
         const resp = await fetch(url)
@@ -64,7 +63,6 @@ const navigate= useNavigate();
         alert('Si è verificato un errore:', error);
       }
     };
-
   }
 
   return (
@@ -72,7 +70,7 @@ const navigate= useNavigate();
       {showSearch && (
         <Form className="d-flex search-form" onSubmit={getRistorantibyStringAndCity}>
           <Form.Control size="sm" type="text" placeholder="Città" value={city} onChange={(e) => setCity(e.target.value)} />
-          <Form.Control size="sm" type="text" placeholder="Ristorante, Tipo cucina" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+          <Form.Control size="sm" type="text" placeholder="Ristorante o Tipo cucina" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
           <Button className="my-button"  disabled={!city && !searchValue} onClick={handleSearch}>
             <BsSearch />
           </Button>

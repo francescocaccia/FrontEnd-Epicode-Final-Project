@@ -109,7 +109,7 @@
 
 
 .carousel-image {
-  width: 300px;
+  width: 400px;
   height: 200px;
   object-fit: cover;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -133,6 +133,7 @@
 #restaurantCard {
   transform: scale(1.05);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  object-fit: cover;
 }
 
 
@@ -195,7 +196,7 @@
 /* rating stelline recensione */
 
 .star-active {
-  color: yellow;
+  color: #FFD700;
 }
 
 .star-inactive {

@@ -12,7 +12,7 @@ App&tito è un'applicazione dedicata alla ricerca dei migliori ristoranti sul te
 
 ## Caratteristiche principali
 
-🍴 **Esplora e scopri**: La homepage offre una gamma di ristoranti in evidenza. Sfoglia i nomi dei ristoranti e trova facilmente quello che stai cercando utilizzando la nostra funzione di ricerca avanzata per nome o per città. 🔎
+🍴 **Esplora e scopri**: La homepage offre una gamma di ristoranti in evidenza. Sfoglia i nomi dei ristoranti e trova facilmente quello che stai cercando utilizzando la nostra funzione di ricerca avanzata per nome, per città o addirittura per tipologia di cucina. 🔎
 
 📝 **Recensioni**: Una volta selezionato un ristorante, sarai indirizzato a una pagina dedicata che ti fornirà una panoramica completa del locale. Leggi recensioni che offrono valutazioni critiche e analisi degli aspetti salienti del ristorante. Siamo qui per condividere con te le nostre opinioni esperte! 💡
 

@@ -125,7 +125,7 @@ function InitialFormPage() {
                 <InputGroup>
                   <Form.Control
                     type="text"
-                    placeholder="Nome ristorante o tipo"
+                    placeholder="Nome ristorante o tipo cucina"
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                   />

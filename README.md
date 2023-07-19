@@ -1,8 +1,7 @@
-Sì, posso aiutarti a creare un file README simile per il tuo progetto App&tito. Ecco un esempio di come potrebbe essere strutturato il tuo file README:
 
 # App&tito - Trova i migliori ristoranti in Italia
 
-![App&tito](https://github.com/francescocaccia/FrontEnd-Epicode-Final-Project/assets/123968277/1987f36f-4fc5-4f8a-81d4-7597c6a7dc20)
+![App&tito]()
 
 Benvenuti su App&tito, l'app definitiva per trovare i migliori ristoranti in Italia! 🍝🍕
 

@@ -37,6 +37,6 @@ Sono felice di ricevere feedback, suggerimenti e domande su App&tito. Non esitar
 -📧 Email: [cacciapuotifrancesco3@gmail.com]
 -👥 LinkedIn: [Francesco Cacciapuoti](https://www.linkedin.com/in/francesco-cacciapuoti-45019718a/)
 -🐙 GitHub: [francescocaccia](https://github.com/francescocaccia)
--📒 Portfolio: [Portfolio](https://link-al-tuo-portfolio)
+-📒 Portfolio: [Portfolio](https://portfolio-francesco-cacciapuoti.vercel.app/)
 
 Unisciti a me in questa avventura culinaria e scopri i migliori ristoranti in Italia con App&tito! 🌟🍴✨     😊
